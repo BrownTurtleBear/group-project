@@ -1,2 +1,7 @@
 # Dating-Sim-group-project
-Marryatville Legal Studies 2024 Year 12 Group Project
+## Roles
+**Hamish**: Dialogue 
+**Lucas**: Backend
+**Minh**: Game design
+**Tommo**: Design
+## To-do list
