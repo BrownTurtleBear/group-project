@@ -1,6 +1,4 @@
 import pygame
-import urllib.request
-import io
 from sys import exit
 
 # General setup
