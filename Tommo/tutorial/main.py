@@ -2,7 +2,7 @@ import pygame
 from sys import exit
 
 # General setup
-pygame.init( )
+pygame.init()
 
 # Game Screen
 screen_width = 800
