@@ -1,7 +1,7 @@
 import pygame
 from sys import exit
 from random import randint, choice
-
+s
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
