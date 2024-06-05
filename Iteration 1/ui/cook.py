@@ -2,7 +2,6 @@ import pygame
 from sys import exit
 from cooking import Cooking
 
-
 screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -20,14 +19,25 @@ cook_button = [cook_button_default, cook_button_hover, cook_button_clicked]
 cook_button_index = 0
 cook_button_rect = cook_button_default.get_rect(center=(screen_width / 2, screen_height / 2)) 
 
+HIDE_TEXT_EVENT = pygame.USEREVENT + 1
+
 def cook(ingredients):
     matching_recipes = cooking.check_recipes(ingredients)
     if matching_recipes:
-        print("You can make the following recipes:")
-        for recipe in matching_recipes:
-            print(recipe)
+        recipe_names = matching_recipes
+        recipe_text = ", ".join(recipe_names)
+        text = f"You just made {recipe_text}!"
     else:
-        print("You do not have enough ingredients to make any recipe.")
+        text = "You cant make anything with that"
+    font = pygame.font.Font(None, 36)
+    rendered_text = font.render(text, True, (255, 255, 255))
+    text_rect = rendered_text.get_rect(center=(screen_width / 2, screen_height / 2 + 50))
+    pygame.time.set_timer(HIDE_TEXT_EVENT, 3000)
+    return rendered_text, text_rect, True
+
+show_text = False
+cooked_text = None
+cooked_text_rect = None
 
 while True:
     for event in pygame.event.get():
@@ -46,12 +56,20 @@ while True:
         elif event.type == pygame.MOUSEBUTTONUP:
             if cook_button_rect.collidepoint(event.pos) and cook_button_clicked:
                 cook_button_index = 1
-                cook(["Fish", "Rice"])
+                cooked = cook(["Bread", "Egg"])
+                cooked_text, cooked_text_rect, show_text = cooked
                 cook_button_clicked = False
             else:
                 cook_button_clicked = False
+        elif event.type == HIDE_TEXT_EVENT:
+            show_text = False
+            pygame.time.set_timer(HIDE_TEXT_EVENT, 0)
                     
+    screen.fill((0, 0, 0))  # Clear the screen
     screen.blit(cook_button[cook_button_index], cook_button_rect)
+    
+    if show_text and cooked_text is not None:
+        screen.blit(cooked_text, cooked_text_rect)
 
     pygame.display.update()
     clock.tick(60)
