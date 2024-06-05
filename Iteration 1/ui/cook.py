@@ -2,6 +2,7 @@ import pygame
 from sys import exit
 from cooking import Cooking
 
+
 screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -24,19 +25,19 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    
-    screen.fill((255, 255, 255))
-
-    items = ["Egg", "Bread", "Milk", "Flour"]
-
-    matching_recipes = cooking.check_recipes(items)
-
-    if matching_recipes:
-        print("You can make the following recipes:")
-        for recipe in matching_recipes:
-            print(recipe)
-    else:
-        print("You do not have enough ingredients to make any recipe.")
+    if event.type == pygame.MOUSEMOTION:
+            if cook_button_rect.collidepoint(event.pos):
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        cook_button_index = 2
+                    else:
+                        cook_button_index = 1
+                    
+                    items = ["apple", ""]
+            else:
+                cook_button_index = 0
+                    
+    screen.blit(cook_button[cook_button_index], cook_button_rect)
 
     pygame.display.update()
     clock.tick(60)
