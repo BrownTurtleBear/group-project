@@ -42,12 +42,12 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if cook_button_rect.collidepoint(event.pos):
                 cook_button_index = 2
-                cook_button_clicked = True  # Set the flag to true on button down
+                cook_button_clicked = True 
         elif event.type == pygame.MOUSEBUTTONUP:
             if cook_button_rect.collidepoint(event.pos) and cook_button_clicked:
                 cook_button_index = 1
-                cook(["Fish", "Rice"])  # Call the cook function with the ingredients
-                cook_button_clicked = False  # Reset the flag after calling the function
+                cook(["Fish", "Rice"])
+                cook_button_clicked = False
             else:
                 cook_button_clicked = False
                     
