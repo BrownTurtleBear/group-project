@@ -9,9 +9,9 @@ class Cooking:
             recipes = json.load(file)
         return recipes
 
-    def check_recipes(self, items):
+    def check_recipes(self, inventory):
         matching_recipes = []
-        items_set = set(items)
+        items_set = set(inventory)
 
         for recipe in self.recipes:
             ingredients_set = set(recipe["ingredients"])
