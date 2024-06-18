@@ -1,21 +1,16 @@
 import json
+import pygame
 
 class Cooking:
-    def __init__(self, filename):
-        self.recipes = self.load_recipes(filename)
-
-    def load_recipes(self, filename):
-        with open(filename, 'r') as file:
-            recipes = json.load(file)
-        return recipes
-
-    def check_recipes(self, inventory):
-        matching_recipes = []
-        items_set = set(inventory)
-
-        for recipe in self.recipes:
-            ingredients_set = set(recipe["ingredients"])
-            if ingredients_set.issubset(items_set):
-                matching_recipes.append(recipe["recipe"])
-
-        return matching_recipes
+    def __init__(self):
+        self.recipes = json.load("recipe.json")
+    
+    def cook(ingredients, food):
+        needed_ingredients = ["Egg", "Toast"]
+        
+        if ingredients == needed_ingredients:
+            text = f"Cooked {food}"
+            
+            return True
+        else:
+            return False
