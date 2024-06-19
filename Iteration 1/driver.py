@@ -14,15 +14,15 @@ pygame.init()
 
 # cooking = Cooking()
 
-egg = Item("Egg", [1,3], "Just an egg.")
-bread = Item("Bread", [3, 4], "One loaf.")
+items = {
+    "Egg": Item("Egg", (1, 3), (40, 60), "Just an egg."),
+    "Bread": Item("Bread", (3, 4), (30, 40), "One loaf."),
+}
 
 inventory = Inventory()
 
-inventory.add_item(egg, 1)
-inventory.add_item(bread, 1)
-
-
+inventory.add_item(items["Egg"], 1)
+inventory.add_item(items["Bread"], 1)
 
 cook_button_default = pygame.image.load(r"Iteration 1\assets\ui\cooking\button_cook_defaut.png").convert_alpha()
 cook_button_hover = pygame.image.load(r"Iteration 1\assets\ui\cooking\button_cook_hover.png").convert_alpha()
@@ -37,9 +37,9 @@ show_text = False
 cooked_text = None
 cooked_text_rect = None
 
+inventory_open = False
+
 while True:
-    screen.fill((0, 0, 0)) 
-    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -53,6 +53,10 @@ while True:
             if cook_button_rect.collidepoint(event.pos):
                 cook_button_index = 2
                 cook_button_clicked = True 
+            elif inventory_open and event.button == 1:
+                mouse_x, mouse_y = event.pos
+                new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
+                inventory.move_item("Egg", new_position)
         elif event.type == pygame.MOUSEBUTTONUP:
             if cook_button_rect.collidepoint(event.pos) and cook_button_clicked:
                 cook_button_index = 1
@@ -65,13 +69,15 @@ while True:
             show_text = False
             pygame.time.set_timer(HIDE_TEXT_EVENT, 0)
 
-        if event.type == pygame.KEYDOWN:
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_e]:
-                inventory.open(screen)
-                print("hi <3")
-                    
-     # Clear the screen
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_e:
+                inventory_open = not inventory_open
+
+    screen.fill((0, 0, 0)) 
+
+    if inventory_open:
+        inventory.open(screen)
+    
     screen.blit(cook_button[cook_button_index], cook_button_rect)
     
     if show_text and cooked_text is not None:

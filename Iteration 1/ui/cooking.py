@@ -10,7 +10,6 @@ class Cooking:
         
         if ingredients == needed_ingredients:
             text = f"Cooked {food}"
-            
             return True
         else:
             return False
