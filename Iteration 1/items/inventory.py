@@ -18,7 +18,7 @@ class Inventory:
             item = item_dict['item']
             x, y = item.coords
             inv_x, inv_y = item.inventory_pos
-            item_rect = pygame.Rect(x * 16, y * 16, 16, 16)
+            item_rect = pygame.Rect(x * 16, y * 16, 32, 32)
             screen.blit(item.image, (self.image_rect.x + inv_x, self.image_rect.y + inv_y), item_rect)
 
     def move_item(self, item_name, new_position):
