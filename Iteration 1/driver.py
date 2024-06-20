@@ -12,7 +12,7 @@ clock = pygame.time.Clock()
 
 pygame.init()
 
-# cooking = Cooking()
+cooking = Cooking()
 
 items = {
     "Egg": Item("Egg", (1, 3), (40, 60), "Just an egg."),
@@ -30,8 +30,6 @@ cook_button_clicked = pygame.image.load(r"Iteration 1\assets\ui\cooking\button_c
 cook_button = [cook_button_default, cook_button_hover, cook_button_clicked]
 cook_button_index = 0
 cook_button_rect = cook_button_default.get_rect(center=(screen_width / 2, screen_height / 2)) 
-
-HIDE_TEXT_EVENT = pygame.USEREVENT + 1
 
 show_text = False
 cooked_text = None
@@ -61,13 +59,14 @@ while True:
             if cook_button_rect.collidepoint(event.pos) and cook_button_clicked:
                 cook_button_index = 1
                 cooked = cooking.cook(["Bread", "Egg"], "Fried Egg on Toast")
-                cooked_text, cooked_text_rect, show_text = cooked
+                if cooked:
+                    cooked_text = pygame.font.SysFont("Arial", 20).render(f"{cooked[1]} cooked!", True, (255, 255, 255))
+                    cooked_text_rect = cooked_text.get_rect(center=(screen_width / 2, screen_height / 2 + 50))
+                    show_text = True
+                    print(f"{cooked[1]} cooked!")
                 cook_button_clicked = False
             else:
                 cook_button_clicked = False
-        elif event.type == HIDE_TEXT_EVENT:
-            show_text = False
-            pygame.time.set_timer(HIDE_TEXT_EVENT, 0)
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_e:
@@ -80,7 +79,7 @@ while True:
     
     screen.blit(cook_button[cook_button_index], cook_button_rect)
     
-    if show_text and cooked_text is not None:
+    if show_text:
         screen.blit(cooked_text, cooked_text_rect)
 
     pygame.display.update()
