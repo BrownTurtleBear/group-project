@@ -3,14 +3,16 @@ import pygame
 
 class Cooking:
     def __init__(self):
-        self.recipes = json.load("recipe.json")
-    
-    def cook(ingredients, food):
-        needed_ingredients = ["Egg", "Toast"]
-        
-        if ingredients == needed_ingredients:
-            text = f"Cooked {food}"
+        with open(r"recipes.json", "r") as f:
+            self.recipes = json.load(f)
             
-            return True
+    
+    
+    def cook(self, ingredients, food):
+        
+        needed_ingredients = self.recipes[food]
+        
+        if all(ni in ingredients for ni in needed_ingredients):
+            return True, food
         else:
-            return False
+            return False, None

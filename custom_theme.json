@@ -1,0 +1,24 @@
+{
+    "button":
+    {
+        "images":
+        {
+            "normal_image": {
+                "package": "Iteration 1.assets.ui.cooking",
+                "resource": "button_cook_default.png",
+                "sub_surface_rect": "0,0,32,32"
+            },
+            "hovered_image": {
+                "package": "Iteration 1.assets.ui.cooking",
+                "resource": "button_cook_hovered.png",
+                "sub_surface_rect": "32,0,32,32"
+            },
+            "selected_image": {
+                "package": "Iteration 1.assets.ui.cooking",
+                "resource": "button_cook_clicked.png",
+                "sub_surface_rect": "64,0,32,32"
+            }
+
+        }
+    }
+}
