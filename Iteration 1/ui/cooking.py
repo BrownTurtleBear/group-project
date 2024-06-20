@@ -1,6 +1,7 @@
 import json
 import pygame
 
+
 class Cooking:
     def __init__(self):
         with open(r"Iteration 1\ui\recipes.json", "r") as f:
