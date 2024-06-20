@@ -1,0 +1,96 @@
+[
+    {
+        "recipe": "Fried Egg on Toast",
+        "ingredients": [
+            "Egg",
+            "Bread"
+        ]
+    },
+    {
+        "recipe": "Tacos al Pastor",
+        "ingredients": [
+            "Pork",
+            "Pineapple",
+            "Bread"
+        ]
+    },
+    {
+        "recipe": "Sushi Rolls",
+        "ingredients": [
+            "Rice",
+            "Fish"
+        ]
+    },
+    {
+        "recipe": "Margherita Pizza",
+        "ingredients": [
+            "Tomato",
+            "Milk",
+            "Flour"
+        ]
+    },
+    {
+        "recipe": "Croissant",
+        "ingredients": [
+            "Butter",
+            "Flour"
+        ]
+    },
+    {
+        "recipe": "Pad Thai",
+        "ingredients": [
+            "Rice",
+            "Fish",
+            "Nuts"
+        ]
+    },
+    {
+        "recipe": "Falafel",
+        "ingredients": [
+            "Chickpeas",
+            "Garlic",
+            "Bread"
+        ]
+    },
+    {
+        "recipe": "Borscht",
+        "ingredients": [
+            "Beetroot",
+            "Cabbage",
+            "Potatoes"
+        ]
+    },
+    {
+        "recipe": "Paella",
+        "ingredients": [
+            "Rice",
+            "Rabbit",
+            "Fish",
+            "Beans"
+        ]
+    },
+    {
+        "recipe": "Goulash",
+        "ingredients": [
+            "Beef",
+            "Potatoes",
+            "Spices"
+        ]
+    },
+    {
+        "recipe": "Baklava",
+        "ingredients": [
+            "Flour",
+            "Nuts",
+            "Honey"
+        ]
+    },
+    {
+        "recipe": "Pavlova",
+        "ingredients": [
+            "Egg",
+            "Sugar",
+            "Fruit"
+        ]
+    }
+]
