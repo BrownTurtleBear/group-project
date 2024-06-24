@@ -12,9 +12,9 @@ screen_width = width * tile_size
 screen_height = height * tile_size
 screen = pygame.display.set_mode((screen_height, screen_height))
 pygame.display.set_caption("Fishing Sim")
-pygame.display.set_icon(pygame.image.load('sprites/icon.png'))
+pygame.display.set_icon(pygame.image.load('../assets/ui/menu/icon.png'))
 clock = pygame.time.Clock()
-x, y = 10, 10
+x, y = 10, 1
 clicked = ["main", False]
 start = False
 settings = False

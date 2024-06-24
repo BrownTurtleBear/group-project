@@ -74,7 +74,7 @@ class UI:
         font = pygame.font.Font("text/aller-font/Aller_Bd.ttf", 30)
         text = font.render("Character Customisation", False, "White")
         text_rect = text.get_rect(center=(self.sc_width / 2, 35))
-        box_im = pygame.image.load('sprites/box1.png')
+        box_im = pygame.image.load('../assets/ui/menu/box1.png')
         # Section Boxes
         for i, value in enumerate(self.sprite_values.keys()):
             if self.menu_option == value:
@@ -281,11 +281,11 @@ class UI:
         text1_rect = text1.get_rect(center=(self.sc_width / 4 + 35, self.sc_height / 2 + 10))
         self.screen.blit(text1, text1_rect)
 
-        volume_im = pygame.image.load('sprites/volume.png')
+        volume_im = pygame.image.load('../assets/ui/menu/volume.png')
         volume_im = pygame.transform.scale(volume_im, (50, 45))
         volume_im_rect = volume_im.get_rect(center=(90, 210))
         self.screen.blit(volume_im, volume_im_rect)
-        up_key = pygame.image.load('sprites/arrow.png')
+        up_key = pygame.image.load('../assets/ui/menu/arrow.png')
         up_key = pygame.transform.scale(up_key, (45, 45))
         up_key_rect = up_key.get_rect(center=(135, 160))
         down_key = pygame.transform.flip(up_key, False, True)
