@@ -1,5 +1,6 @@
 import pygame
 
+
 class Item:
     def __init__(self, name, coords, inventory_pos, description=None):
         self.name = name

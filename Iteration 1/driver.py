@@ -4,6 +4,7 @@ from ui.cooking import Cooking
 from items.item import Item
 from items.inventory import Inventory
 
+
 screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -15,8 +16,8 @@ pygame.init()
 cooking = Cooking()
 
 items = {
-    "Egg": Item("Egg", (1, 3), (40, 60), "Just an egg."),
-    "Bread": Item("Bread", (3, 4), (30, 40), "One loaf."),
+    "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
+    "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
 }
 
 inventory = Inventory()
