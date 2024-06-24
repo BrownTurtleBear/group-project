@@ -1,17 +1,20 @@
-class Some:
-    def __init__(self, content):
-        self.content = content
+from ui import UI
+import pygame
+ui = UI()
+menu = "main"
+pygame.init()
+screen = pygame.display.set_mode((800, 800))
+clock = pygame.time.Clock()
 
-hair_colour = Some("white")
 
-section_dict ={
-    "Gender": 0,
-    "Hair": [hair_colour]
-}
-
-menu_option= "Hair"
-print(hair_colour.content)
-
-section_dict[menu_option][0].content = ("black")
-
-print(hair_colour.content)
+while True:
+    screen.fill('black')
+    if menu == "main":
+        pos = pygame.mouse.get_pos()
+        text, text_rect = ui.text(screen.get_width()/2, 60, 50)
+        screen.blit(text, text_rect)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+    pygame.display.update()
+    clock.tick(60)
