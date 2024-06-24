@@ -1,7 +1,9 @@
-import pygame, sys
+import pygame
 import random
-from player import Player
+import sys
+
 from map import Map
+from player import Player
 from ui import UI
 
 pygame.init()

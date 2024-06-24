@@ -3,7 +3,7 @@ import pygame
 
 class Inventory:
     def __init__(self):
-        self.image = pygame.image.load(r"Iteration 1\assets\sprites\items\inventory.png").convert_alpha()
+        self.image = pygame.image.load(r"assets\sprites\items\inventory.png").convert_alpha()
         self.image_rect = self.image.get_rect()
         self.items = {}
 
@@ -17,7 +17,7 @@ class Inventory:
         screen.blit(self.image, self.image_rect)
         for item_dict in self.items.values():
             item = item_dict['item']
-            x, y = item.coords
+            x, y = item.pos
             inv_x, inv_y = item.inventory_pos
             scaled_item_image = pygame.transform.scale(item.image, (item.image.get_width() * 2, item.image.get_height() * 2))
             item_rect = pygame.Rect(x * 32, y * 32, 32, 32)
