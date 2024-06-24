@@ -42,7 +42,7 @@ class Map:
                     player.rect.bottom = sprite.rect.top
 
     def load_sprites(self, colour):
-        # Tile Sprites
+        # tiles sprites
         for i in range(0, self.width):
             for j in range(0, self.height):
                 for l in range(0, 1):
@@ -58,7 +58,7 @@ class Map:
                         self.allsprites.add(sprite)
                         if l == 0:
                             self.wallsprites.add(sprite)
-        # Player
+        # player
         self.player = pygame.sprite.GroupSingle()
         x = self.spawnPointX * self.tile_size
         y = self.spawnPointY * self.tile_size
@@ -77,7 +77,7 @@ class Map:
     def run(self):
         # Level Tiles
         self.redraw()
-        # Player
+        # player
         self.player.update(self.screen, self.spawnPointX, self.spawnPointY, self.tile_size)
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
