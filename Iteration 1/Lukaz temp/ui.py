@@ -318,13 +318,12 @@ class UI:
             self.settings = True
         return self.clicked, self.settings
 
-    def text(self, x, y, size):
-        font = pygame.font.Font("text/aller-font/Aller_Bd.ttf", size)
-        text = font.render("Fishing Sim", False, "Black")
+    def text(self, x, y, size, colour, text):
+        font = pygame.font.Font("../assets/text/aller-font/Aller_Bd.ttf", size)
+        text = font.render(text, False, colour)
         text_rect = text.get_rect(center=(x, y))
         self.screen.blit(text, text_rect)
-        return text, text_rect
 
-    def button(self, screen, x, y, width, height, colour):
-        button = pygame.draw.rect(screen, colour, pygame.Rect(x, y, width, height))
+    def button(self, x, y, width, height, colour):
+        button = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
         return button

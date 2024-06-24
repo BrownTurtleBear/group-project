@@ -23,7 +23,7 @@ character_custom = False
 # Defining Classes
 ui = UI(screen, clicked)
 player1 = Player((1, 1), "Red")
-mapping = Map(('levels\map' + str(1) + '.tmx'), tile_size, width, height, 1)
+mapping = Map(('../assets/levels/map' + str(1) + '.tmx'), tile_size, width, height, 1)
 
 while True:
     screen.fill('black')
