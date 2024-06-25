@@ -1,5 +1,6 @@
 import pygame
 import math
+from sys import exit
 
 
 class UI:
@@ -318,6 +319,9 @@ class UI:
             self.settings = True
         return self.clicked, self.settings
 
+    def img_button(self):
+        print("seme")
+
     def text(self, x, y, size, colour, text):
         font = pygame.font.Font("../assets/text/aller-font/Aller_Bd.ttf", size)
         text = font.render(text, False, colour)
@@ -325,5 +329,14 @@ class UI:
         self.screen.blit(text, text_rect)
 
     def button(self, x, y, width, height, colour):
+        pos = pygame.mouse.get_pos()
         button = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
+        if button.collidepoint(pos):
+            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 5)
+            if pygame.mouse.get_pressed()[0] == 1:
+                self.clicked[1] = True
+            elif self.clicked[1]:
+                self.clicked[1] = False
+                pygame.quit()
+                exit()
         return button
