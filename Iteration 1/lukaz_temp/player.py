@@ -11,11 +11,11 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animations['idle'][self.frame_index]
         self.rect = self.image.get_rect(topleft=pos)
 
-        # Player Movement
+        # player Movement
         self.direction = pygame.math.Vector2(0, 0)
         self.speed = 3
 
-        # Player Status
+        # player Status
         self.status = 'idle'
         self.facing_right = True
         self.on_ground = False
@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         return surface_list
 
     def import_character_assets(self, colour):
-        character_path = ('Iteration 1/lukaz_temp/sprites/Player/' + colour + '/')
+        character_path = ('sprites/player/' + colour + '/')
         self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': [], 'land': []}
 
         for animation in self.animations.keys():
