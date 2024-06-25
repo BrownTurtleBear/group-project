@@ -319,8 +319,10 @@ class UI:
             self.settings = True
         return self.clicked, self.settings
 
-    def img_button(self):
-        print("seme")
+    def img_button(self, x, y, location):
+        button = pygame.image.load(r"Iteration 1\assets\ui" + location).convert_alpha()
+        button_rect = button.get_rect(center=(x, y))
+        self.screen.blit(button, button_rect)
 
     def text(self, x, y, size, colour, text):
         font = pygame.font.Font("../assets/text/aller-font/Aller_Bd.ttf", size)
@@ -328,7 +330,7 @@ class UI:
         text_rect = text.get_rect(center=(x, y))
         self.screen.blit(text, text_rect)
 
-    def button(self, x, y, width, height, colour):
+    def button(self, x, y, width, height, colour, type):
         pos = pygame.mouse.get_pos()
         button = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
         if button.collidepoint(pos):
@@ -337,6 +339,5 @@ class UI:
                 self.clicked[1] = True
             elif self.clicked[1]:
                 self.clicked[1] = False
-                pygame.quit()
-                exit()
+                self.clicked[0] = type
         return button
