@@ -319,8 +319,9 @@ class UI:
             self.settings = True
         return self.clicked, self.settings
 
-    def img_button(self, x, y, location):
-        button = pygame.image.load(r"Iteration 1\assets\ui" + location).convert_alpha()
+    def img_button(self, x, y, w, h, location):
+        button = pygame.image.load(location).convert_alpha()
+        button = pygame.transform.scale(button, (w, h))
         button_rect = button.get_rect(center=(x, y))
         self.screen.blit(button, button_rect)
 
