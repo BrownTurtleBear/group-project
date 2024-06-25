@@ -1,7 +1,7 @@
 import pygame
 from pytmx.util_pygame import load_pygame
 from bs4 import BeautifulSoup
-from player import Player
+from lukaz_temp.player import Player
 
 
 class Map:

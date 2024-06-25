@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         return surface_list
 
     def import_character_assets(self, colour):
-        character_path = ('Sprites/Player/' + colour + '/')
+        character_path = ('Iteration 1/lukaz_temp/sprites/Player/' + colour + '/')
         self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': [], 'land': []}
 
         for animation in self.animations.keys():

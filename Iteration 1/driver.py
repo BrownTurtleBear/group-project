@@ -15,7 +15,7 @@ tile_size = 20
 screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_icon(pygame.image.load('./assets/ui/menu/icon.png'))
+pygame.display.set_icon(pygame.image.load(r'Iteration 1\assets\ui\menu\icon.png'))
 pygame.display.set_caption("Love bites")
 
 clock = pygame.time.Clock()
@@ -33,7 +33,7 @@ character_custom = False
 # Defining Classes
 ui = UI(screen, clicked)
 player1 = Player((1, 1), "Red")
-mapping = Map(('levels\map' + str(1) + '.tmx'), tile_size, width, height, 1)
+mapping = Map((r'levels\map' + str(1) + '.tmx'), tile_size, width, height, 1)
 
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
