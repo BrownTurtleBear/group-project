@@ -34,7 +34,6 @@ class UI:
         self.settings = True
         self.volume = 50
 
-
     def idle(self):
         print(None)
 
@@ -321,7 +320,7 @@ class UI:
         return self.clicked, self.settings
 
     def img_button(self):
-        print("semen")
+        print("seme")
 
     def text(self, x, y, size, colour, text):
         font = pygame.font.Font("../assets/text/aller-font/Aller_Bd.ttf", size)
