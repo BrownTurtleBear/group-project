@@ -141,8 +141,8 @@ class UI:
             pygame.draw.rect(self.screen, "White", pygame.Rect(x * 3, self.sc_height * 0.58,
                                                                (self.sc_width - (x * 6)), self.sc_height / 2.5 - x * 2))
             pygame.draw.rect(self.screen, "Black", pygame.Rect(x * 3, self.sc_height * 0.58,
-                                                               (self.sc_width - (x * 6)), self.sc_height / 2.5 - x * 2),
-                             3)
+                                                               (self.sc_width - (x * 6)),
+                                                               self.sc_height / 2.5 - x * 2), 3)
             font1 = pygame.font.Font("text/aller-font/Aller_Bd.ttf", 25)
             text1 = font1.render(self.menu_option, False, "Black")
             text1_rect = text1.get_rect(center=(self.sc_width / 2, self.sc_height / 2 + 20))
@@ -319,11 +319,9 @@ class UI:
             self.settings = True
         return self.clicked, self.settings
 
-    def img_button(self, x, y, w, h, location):
-        button = pygame.image.load(location).convert_alpha()
-        button = pygame.transform.scale(button, (w, h))
-        button_rect = button.get_rect(center=(x, y))
-        self.screen.blit(button, button_rect)
+    def outlined_rect(self, x, y, w, h, outline, colour):
+        pygame.draw.rect(self.screen, colour, pygame.Rect((x, y), (w, h)))
+        pygame.draw.rect(self.screen, "Black", pygame.Rect((x, y), (w, h)), outline)
 
     def text(self, x, y, size, colour, text):
         font = pygame.font.Font("../assets/text/aller-font/Aller_Bd.ttf", size)
@@ -331,14 +329,60 @@ class UI:
         text_rect = text.get_rect(center=(x, y))
         self.screen.blit(text, text_rect)
 
+    def custom_button(self, x, y, w, h, location, value):
+        pos = pygame.mouse.get_pos()
+        button = pygame.image.load(location).convert_alpha()
+        button = pygame.transform.scale(button, (w, h))
+        button_rect = button.get_rect(center=(x, y))
+        self.screen.blit(button, button_rect)
+        if button_rect.collidepoint(pos) and self.menu_option != value:
+            button = pygame.transform.scale(button, (w, h))
+            button_rect = button.get_rect(center=(x, y))
+            if pygame.mouse.get_pressed()[0] == 1:
+                self.menu_option = value
+        self.screen.blit(button, button_rect)
+
+    def img_button(self, x, y, w, h, location):
+        button = pygame.image.load(location).convert_alpha()
+        button = pygame.transform.scale(button, (w, h))
+        button_rect = button.get_rect(center=(x, y))
+        self.screen.blit(button, button_rect)
+
     def button(self, x, y, width, height, colour, type):
         pos = pygame.mouse.get_pos()
         button = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
+        pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 1)
         if button.collidepoint(pos):
-            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 5)
+            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 3)
             if pygame.mouse.get_pressed()[0] == 1:
                 self.clicked[1] = True
             elif self.clicked[1]:
                 self.clicked[1] = False
                 self.clicked[0] = type
         return button
+
+    def temp_button(self, type, x, y, width, height, colour, location, variable, value):
+        pos = pygame.mouse.get_pos()
+        if type == "rect":
+            button_rect = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
+            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 1)
+        elif type == "img":
+            button = pygame.image.load(location).convert_alpha()
+            button = pygame.transform.scale(button, (width, height))
+            button_rect = button.get_rect(center=(x, y))
+            self.screen.blit(button, button_rect)
+        else:
+            button, button_rect = None, None
+        if button_rect.collidepoint(pos):
+            if type == "rect":
+                pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 3)
+            elif type == "img":
+                button = pygame.transform.scale(button, (width, height))
+                button_rect = button.get_rect(center=(x, y))
+                self.screen.blit(button, button_rect)
+            if pygame.mouse.get_pressed()[0] == 1:
+                self.clicked[1] = True
+            elif self.clicked[1]:
+                self.clicked[1] = False
+                variable = value
+                
