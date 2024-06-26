@@ -19,16 +19,22 @@ while True:
     w, h = screen_width - (x * 2), screen_height - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if clicked[0] == "main":
-        ui.text(screen_width / 2, 60, 50, "Black", "Fishing Sim")
-        exit_button = ui.temp_button1("rect", screen_width - 70, 10, 60, 30, "Red", None)
+        exit_button = ui.button("rect", screen_width - 70, 10, 60, 30, "Red", None)
         if exit_button:
             clicked[0] = "exit"
-        ui.text(screen.get_width() - 39, 24, 15, "Black", "Exit")
-        start_button = ui.button(screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", "start")
+        start_button = ui.button("rect", screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", None)
+        if start_button:
+            clicked[0] = "start"
+        character_button = ui.button("rect", screen_width / 2 - 80, screen_height / 2, 170, 80, "Blue", None)
+        if character_button:
+            clicked[0] = "character"
+        settings_button = ui.button("rect", screen_width / 2 - 80, screen_height / 2 + 90, 170, 80, "Grey", None)
+        if settings_button:
+            clicked[0] = "settings"
+        ui.text(screen_width / 2, 60, 50, "Black", "Fishing Sim")
+        ui.text(screen_width - 39, 24, 15, "Black", "Exit")
         ui.text(screen_width / 2 + 5, screen_height / 2 - 50, 35, "Black", "Start")
-        character_button = ui.button(screen_width / 2 - 80, screen_height / 2, 170, 80, "Blue", "character")
         ui.text(screen_width / 2 + 5, screen_height / 2 + 40, 35, "White", "Character")
-        settings_button = ui.button(screen_width / 2 - 80, screen_height / 2 + 90, 170, 80, "Grey", "settings")
         ui.text(screen_width / 2 + 5, screen_height / 2 + 130, 35, "Black", "Settings")
     if clicked[0] == "settings":
         pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))

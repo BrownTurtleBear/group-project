@@ -57,7 +57,7 @@ class UI:
         button_rect = button.get_rect(center=(x, y))
         self.screen.blit(button, button_rect)
 
-    def button(self, x, y, width, height, colour, type):
+    def temp_button1(self, x, y, width, height, colour, type):
         pos = pygame.mouse.get_pos()
         button = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
         pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 1)
@@ -95,7 +95,7 @@ class UI:
                 self.clicked[1] = False
                 variable = value
 
-    def temp_button1(self, type, x, y, width, height, colour, location):
+    def button(self, type, x, y, width, height, colour, location):
         pos = pygame.mouse.get_pos()
         if type == "rect":
             button_rect = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
