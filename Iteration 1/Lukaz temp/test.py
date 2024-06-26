@@ -20,6 +20,9 @@ while True:
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if clicked[0] == "main":
         ui.text(screen_width / 2, 60, 50, "Black", "Fishing Sim")
+        # THIS IS THE THING THAT I WANT TO WORK: I want the player to input a variable and a value they want it to be
+        # changed to as well as the other values of a button and the button to, if you click it,
+        # change that variable to the value
         ui.temp_button("rect", screen_width - 70, 10, 60, 30, "Red", None, clicked[0], "exit")
         ui.text(screen.get_width() - 39, 24, 15, "Black", "Exit")
         start_button = ui.button(screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", "start")
