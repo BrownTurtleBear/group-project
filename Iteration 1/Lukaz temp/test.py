@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_icon(pygame.image.load('../assets/ui/menu/icon.png'))
 clock = pygame.time.Clock()
 clicked = ["main", False]
+playing = False
 ui = UI(screen, clicked)
 x, y = 10, 10
 volume = 50
@@ -18,6 +19,13 @@ while True:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
+    if clicked[0] == "start":
+        if not playing:
+            screen_width, screen_height = 800, 600
+            screen = pygame.display.set_mode((screen_width, screen_height))
+            playing = True
+        else:
+            print("e")
     if clicked[0] == "main":
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         if exit_button:
