@@ -1,5 +1,4 @@
 import pygame
-import random
 
 from sys import exit
 from ui.cooking import Cooking
@@ -48,11 +47,15 @@ while True:
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_e:
+                if cookbook_open:
+                    cookbook_open = False
                 inventory_open = not inventory_open
             if event.key == pygame.K_r:
+                if inventory_open:
+                    inventory_open = False
                 cookbook_open = not cookbook_open
         elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:  # Left mouse button
+            if event.button == 1:
                 mouse_released = True
 
     if inventory_open:
@@ -62,8 +65,9 @@ while True:
         mouse_pos = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()[0]
         if cooking.open(screen, mouse_pos, mouse_pressed, mouse_released):
-            success, cooked_food = cooking.cook(inventory.items)
+            success, cooked_food = cooking.cook(inventory.items, "Fried Egg on Toast")
             if success:
+                inventory.add_item(cooked_food, 1)
                 print(f"Successfully cooked {cooked_food}")
             else:
                 print("Couldn't cook the recipe")

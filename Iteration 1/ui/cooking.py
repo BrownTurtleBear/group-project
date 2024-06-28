@@ -14,9 +14,8 @@ class Cooking:
         self.button_rect = self.button_default.get_rect()
         self.mouse_pressed_on_button = None
 
-    def cook(self, ingredients):
-        # Assume you have a way to determine which recipe to cook
-        recipe_to_cook = "Fried Egg on Toast"  # This should be determined dynamically
+    def cook(self, ingredients, recipe):
+        recipe_to_cook = recipe
         needed_ingredients = self.recipes[recipe_to_cook]
 
         if all(ni in ingredients for ni in needed_ingredients):
