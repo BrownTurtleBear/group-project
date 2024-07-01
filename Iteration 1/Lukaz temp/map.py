@@ -7,7 +7,7 @@ from player import Player
 class Map:
     def __init__(self, filename, tile_size, height, width, level_on):
         # Create Level
-        #self.screen = pygame.display.set_mode((height*tile_size, width*tile_size))
+        self.screen = pygame.display.set_mode((height*tile_size, width*tile_size))
         self.tmx_data = load_pygame(filename)
         with open(filename, 'r') as f:
             data = f.read()
