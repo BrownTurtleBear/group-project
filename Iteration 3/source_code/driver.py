@@ -12,6 +12,7 @@ screen_width = 400
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_icon(pygame.image.load('../Assets/Sprites/UI/icon.png'))
+pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
 clicked = ["main", False]
 playing = False
@@ -25,12 +26,9 @@ items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
     "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
 }
-
 inventory = Inventory()
-
 inventory.add_item(items["Egg"], 1)
 inventory.add_item(items["Bread"], 1)
-
 inventory_open = False
 cookbook_open = False
 
@@ -83,10 +81,8 @@ while True:
                     else:
                         print("Couldn't cook the recipe")
 
-
     if clicked[0] == "main":
-        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
-        if exit_button:
+        if ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None):
             clicked[0] = "exit"
         start_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", None)
         if start_button:
@@ -97,7 +93,7 @@ while True:
         settings_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 + 90, 170, 80, "Grey", None)
         if settings_button:
             clicked[0] = "settings"
-        ui.text(screen_width / 2, 60, 50, "Black", "Fishing Sim")
+        ui.text(screen_width / 2, 60, 50, "Black", "Love Bites")
         ui.text(screen_width - 39, 24, 15, "Black", "Exit")
         ui.text(screen_width / 2 + 5, screen_height / 2 - 50, 35, "Black", "Start")
         ui.text(screen_width / 2 + 5, screen_height / 2 + 40, 35, "White", "Character")
@@ -158,7 +154,8 @@ while True:
                 if colour_button:
                     ui.sprite_values[ui.menu_option][0] = value
         else:
-            ui.outlined_rect(x*3, screen_height*0.58, (screen_width-(x*6)), screen_height/2.5-x*2, 3, "White")
+            ui.outlined_rect(x * 3, screen_height * 0.58, (screen_width - (x * 6)), screen_height / 2.5 - x * 2, 3,
+                             "White")
             ui.text(screen_width / 2, screen_height / 2 + 15, 25, "Black", ui.menu_option)
             genders = ["Male", "Female", "None"]
             for i, value in enumerate(genders):
