@@ -4,7 +4,7 @@ import pygame
 
 class Cooking:
     def __init__(self):
-        with open("./ui/recipes.json", "r") as f:
+        with open("../text/cooking/recipes.json", "r") as f:
             self.recipes = json.load(f)
         self.button_default = pygame.image.load("./assets/ui/cooking/button_cook_default.png")
         self.button_hover = pygame.image.load("./assets/ui/cooking/button_cook_hover.png")
