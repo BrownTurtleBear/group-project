@@ -45,9 +45,6 @@ while True:
             playing = True
         else:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if inventory_open and event.button == 1:
                         mouse_x, mouse_y = event.pos
