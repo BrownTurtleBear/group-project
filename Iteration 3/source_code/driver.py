@@ -85,8 +85,7 @@ while True:
 
 
     if clicked[0] == "main":
-        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
-        if exit_button:
+        if ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None):
             clicked[0] = "exit"
         start_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", None)
         if start_button:

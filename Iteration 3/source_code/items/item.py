@@ -7,5 +7,5 @@ class Item:
         self.pos = pos
         self.inventory_pos = inventory_pos
         self.description = description
-        self.image = pygame.image.load(r"assets\sprites\items\food.png").convert_alpha()
+        self.image = pygame.image.load('../Assets/Sprites/Items/food.png').convert_alpha()
     
