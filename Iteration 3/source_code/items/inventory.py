@@ -3,7 +3,7 @@ import pygame
 
 class Inventory:
     def __init__(self):
-        self.image = pygame.image.load(r"assets\sprites\items\inventory.png").convert_alpha()
+        self.image = pygame.image.load('../Assets/Sprites/Items/inventory.png').convert_alpha()
         self.image_rect = self.image.get_rect()
         self.items = {}
 
