@@ -16,17 +16,18 @@ pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
 menu_section = "main"
 playing = False
-ui = UI(screen)
 x, y = 10, 10
 volume = 50
 
+# Classes
+ui = UI(screen)
 cooking = Cooking()
-
+inventory = Inventory()
+# Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
     "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
 }
-inventory = Inventory()
 inventory.add_item(items["Egg"], 1)
 inventory.add_item(items["Bread"], 1)
 inventory_open = False
