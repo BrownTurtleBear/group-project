@@ -6,9 +6,9 @@ class Cooking:
     def __init__(self):
         with open("../text/cooking/recipes.json", "r") as f:
             self.recipes = json.load(f)
-        self.button_default = pygame.image.load("../Assets/Sprites/UI/Cooking/button_cook_default.png")
-        self.button_hover = pygame.image.load("../Assets/Sprites/UI/Cooking/button_cook_hover.png")
-        self.button_clicked = pygame.image.load("../Assets/Sprites/UI/Cooking/button_cook_clicked.png")
+        self.button_default = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_default.png")
+        self.button_hover = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_hover.png")
+        self.button_clicked = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_clicked.png")
         self.buttons = [self.button_default, self.button_hover, self.button_clicked]
         self.button_index = 0
         self.button_rect = self.button_default.get_rect()
