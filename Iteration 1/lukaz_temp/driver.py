@@ -1,7 +1,9 @@
-import pygame, sys
+import pygame
 import random
-from player import Player
+import sys
+
 from map import Map
+from player import Player
 from ui import UI
 
 pygame.init()
@@ -12,7 +14,7 @@ screen_width = width * tile_size
 screen_height = height * tile_size
 screen = pygame.display.set_mode((screen_height, screen_height))
 pygame.display.set_caption("Fishing Sim")
-pygame.display.set_icon(pygame.image.load('../assets/ui/menu/icon.png'))
+pygame.display.set_icon(pygame.image.load(r'Iteration 1\assets\ui\menu\icon.png'))
 clock = pygame.time.Clock()
 x, y = 10, 1
 clicked = ["main", False]
