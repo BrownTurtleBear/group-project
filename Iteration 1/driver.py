@@ -9,7 +9,7 @@ screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_icon(pygame.image.load(r'.\assets\ui\menu\icon.png'))
-pygame.display.set_caption("Love bites")
+pygame.display.set_caption("Love Bites")
 
 clock = pygame.time.Clock()
 
