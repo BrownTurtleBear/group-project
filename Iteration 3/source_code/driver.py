@@ -1,4 +1,8 @@
 from interactions.ui import UI
+from cooking.cooking import Cooking
+from items.item import Item
+from items.inventory import Inventory
+
 import pygame
 from sys import exit
 import math
@@ -15,6 +19,23 @@ ui = UI(screen, clicked)
 x, y = 10, 10
 volume = 50
 
+cooking = Cooking()
+
+items = {
+    "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
+    "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
+}
+
+inventory = Inventory()
+
+inventory.add_item(items["Egg"], 1)
+inventory.add_item(items["Bread"], 1)
+
+inventory_open = False
+cookbook_open = False
+
+mouse_released = None
+
 while True:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
@@ -25,7 +46,44 @@ while True:
             screen = pygame.display.set_mode((screen_width, screen_height))
             playing = True
         else:
-            print("e")
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if inventory_open and event.button == 1:
+                        mouse_x, mouse_y = event.pos
+                        new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
+                        inventory.move_item("Egg", new_position)
+
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_e:
+                        if cookbook_open:
+                            cookbook_open = False
+                        inventory_open = not inventory_open
+                    if event.key == pygame.K_r:
+                        if inventory_open:
+                            inventory_open = False
+                        cookbook_open = not cookbook_open
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    if event.button == 1:
+                        mouse_released = True
+
+            if inventory_open:
+                inventory.open(screen)
+
+            if cookbook_open:
+                mouse_pos = pygame.mouse.get_pos()
+                mouse_pressed = pygame.mouse.get_pressed()[0]
+                if cooking.open(screen, mouse_pos, mouse_pressed, mouse_released):
+                    success, cooked_food = cooking.cook(inventory.items, "Fried Egg on Toast")
+                    if success:
+                        inventory.add_item(cooked_food, 1)
+                        print(f"Successfully cooked {cooked_food}")
+                    else:
+                        print("Couldn't cook the recipe")
+
+
     if clicked[0] == "main":
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         if exit_button:
