@@ -2,9 +2,9 @@ import pygame
 
 
 class UI:
-    def __init__(self, screen, clicked):
+    def __init__(self, screen):
         self.screen = screen
-        self.clicked = clicked
+        self.clicked = False
         self.menu_option = "Gender"
         self.sprite_values = {
             "Gender": "None",
@@ -61,9 +61,9 @@ class UI:
                 self.screen.blit(button, button_rect)
             if not hold:
                 if pygame.mouse.get_pressed()[0] == 1:
-                    self.clicked[1] = True
-                elif self.clicked[1]:
-                    self.clicked[1] = False
+                    self.clicked = True
+                elif self.clicked:
+                    self.clicked = False
                     return True
             else:
                 if pygame.mouse.get_pressed()[0] == 1:

@@ -14,9 +14,9 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_icon(pygame.image.load('../Assets/Sprites/UI/icon.png'))
 pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
-clicked = ["main", False]
+menu_section = "main"
 playing = False
-ui = UI(screen, clicked)
+ui = UI(screen)
 x, y = 10, 10
 volume = 50
 
@@ -38,7 +38,7 @@ while True:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
-    if clicked[0] == "start":
+    if menu_section == "start":
         if not playing:
             screen_width, screen_height = 800, 600
             screen = pygame.display.set_mode((screen_width, screen_height))
@@ -47,7 +47,6 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if inventory_open and event.button == 1:
                         mouse_x, mouse_y = event.pos
@@ -81,41 +80,42 @@ while True:
                     else:
                         print("Couldn't cook the recipe")
 
-    if clicked[0] == "main":
-        if ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None):
-            clicked[0] = "exit"
+    if menu_section == "main":
+        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         start_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", None)
-        if start_button:
-            clicked[0] = "start"
         character_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2, 170, 80, "Blue", None)
-        if character_button:
-            clicked[0] = "character"
         settings_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 + 90, 170, 80, "Grey", None)
-        if settings_button:
-            clicked[0] = "settings"
         ui.text(screen_width / 2, 60, 50, "Black", "Love Bites")
         ui.text(screen_width - 39, 24, 15, "Black", "Exit")
         ui.text(screen_width / 2 + 5, screen_height / 2 - 50, 35, "Black", "Start")
         ui.text(screen_width / 2 + 5, screen_height / 2 + 40, 35, "White", "Character")
         ui.text(screen_width / 2 + 5, screen_height / 2 + 130, 35, "Black", "Settings")
-    if clicked[0] == "settings":
+        if exit_button:
+            menu_section = "exit"
+        if start_button:
+            menu_section = "start"
+        if character_button:
+            menu_section = "character"
+        if settings_button:
+            menu_section = "settings"
+    if menu_section == "settings":
         pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
-        ui.text(screen_width / 2, 60, 50, "Black", "Settings Menu")
         ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
-        ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
-        ui.text(screen_width / 4 + 35, screen_height / 2 + 10, 25, "Black", str(volume))
         ui.image(90, 210, 50, 45, '../Assets/Sprites/UI/volume.png')
         up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/UI/arrow.png')
+        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow.png')
+        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
+        ui.text(screen_width / 2, 60, 50, "Black", "Settings Menu")
+        ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
+        ui.text(screen_width / 4 + 35, screen_height / 2 + 10, 25, "Black", str(volume))
+        ui.text(screen_width - 39, 24, 15, "Black", "Exit")
         if up_button and volume < 100:
             volume += 1
-        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow.png')
         if down_button and volume > 0:
             volume -= 1
-        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         if exit_button:
-            clicked[0] = "main"
-        ui.text(screen_width - 39, 24, 15, "Black", "Exit")
-    if clicked[0] == "character":
+            menu_section = "main"
+    if menu_section == "character":
         pygame.draw.rect(screen, (3, 7, 252), pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
         ui.outlined_rect(x * 2, screen_height * 0.5, screen_width - (x * 4), screen_height * 0.45, 3, (200, 255, 255))
         ui.text(screen_width / 2, 35, 30, "White", "Character Customisation")
@@ -125,9 +125,8 @@ while True:
                 button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 60, 60, None,
                                    '../Assets/Sprites/UI/box1.png')
             else:
-                button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 50, 50, None,
-                                   '../Assets/Sprites/UI/box1.png')
-                if button:
+                if ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 50, 50, None,
+                             '../Assets/Sprites/UI/box1.png'):
                     ui.menu_option = value
         # Colour Boxes
         if ui.menu_option != "Gender":
@@ -175,9 +174,9 @@ while True:
                     ui.sprite_values["Gender"] = value
         exit_button = ui.button("rect", False, screen_width * 0.8, 60, 60, 30, "Red", None)
         if exit_button:
-            clicked[0] = "main"
+            menu_section = "main"
         ui.text(screen_width * 0.875, 74, 15, "Black", "Exit")
-    if clicked[0] == "exit":
+    if menu_section == "exit":
         pygame.quit()
         exit()
     for event in pygame.event.get():
