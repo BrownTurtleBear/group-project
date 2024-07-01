@@ -101,11 +101,11 @@ while True:
         ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
         ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
         ui.text(screen_width / 4 + 35, screen_height / 2 + 10, 25, "Black", str(volume))
-        ui.image(90, 210, 50, 45, '../Assets/Sprites/UI/volume.png')
-        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/UI/arrow.png')
+        ui.image(90, 210, 50, 45, '../Assets/Sprites/ui/volume.png')
+        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/ui/arrow.png')
         if up_button and volume < 100:
             volume += 1
-        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow.png')
+        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/ui/arrow.png')
         if down_button and volume > 0:
             volume -= 1
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
@@ -120,10 +120,10 @@ while True:
         for i, value in enumerate(ui.sprite_values.keys()):
             if ui.menu_option == value:
                 button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 60, 60, None,
-                                   '../Assets/Sprites/UI/box1.png')
+                                   '../Assets/Sprites/ui/box1.png')
             else:
                 button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 50, 50, None,
-                                   '../Assets/Sprites/UI/box1.png')
+                                   '../Assets/Sprites/ui/box1.png')
                 if button:
                     ui.menu_option = value
         # Colour Boxes

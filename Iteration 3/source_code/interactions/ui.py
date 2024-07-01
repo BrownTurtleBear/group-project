@@ -29,7 +29,7 @@ class UI:
         pygame.draw.rect(self.screen, "Black", pygame.Rect((x, y), (w, h)), outline)
 
     def text(self, x, y, size, colour, text):
-        font = pygame.font.Font("../Assets/Fonts/aller-font/Aller_Bd.ttf", size)
+        font = pygame.font.Font("../assets/fonts/aller-font/Aller_Bd.ttf", size)
         text = font.render(text, False, colour)
         text_rect = text.get_rect(center=(x, y))
         self.screen.blit(text, text_rect)
