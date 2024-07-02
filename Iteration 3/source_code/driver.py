@@ -11,7 +11,7 @@ pygame.init()
 screen_width = 400
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_icon(pygame.image.load('../Assets/Sprites/UI/icon.png'))
+pygame.display.set_icon(pygame.image.load('../assets/sprites/UI/icon.png'))
 pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
 menu_section = "main"
@@ -37,7 +37,7 @@ mouse_released = None
 while True:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
-    pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
+    pygame.draw.rect(screen, "Red", pygame.Rect(x, y, w, h))
     if menu_section == "start":
         if not playing:
             screen_width, screen_height = 800, 600
