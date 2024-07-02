@@ -11,7 +11,7 @@ pygame.init()
 screen_width = 400
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_icon(pygame.image.load('../assets/sprites/UI/icon.png'))
+pygame.display.set_icon(pygame.image.load('../assets/sprites/ui/icon.png'))
 pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
 menu_section = "main"
@@ -21,7 +21,7 @@ volume = 50
 
 # Classes
 ui = UI(screen)
-cooking = Cooking()
+cooking = Cooking(800, 600)
 inventory = Inventory()
 # Items and Inventory
 items = {
@@ -38,7 +38,7 @@ mouse_released = None
 while True:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
-    pygame.draw.rect(screen, "Red", pygame.Rect(x, y, w, h))
+    pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if menu_section == "start":
         if not playing:
             screen_width, screen_height = 800, 600
@@ -64,6 +64,7 @@ while True:
             if cookbook_open:
                 mouse_pos = pygame.mouse.get_pos()
                 mouse_pressed = pygame.mouse.get_pressed()[0]
+                cooking.book(screen)
                 if cooking.open(screen, mouse_pos, mouse_pressed, mouse_released):
                     success, cooked_food = cooking.cook(inventory.items, "Fried Egg on Toast")
                     if success:
@@ -115,10 +116,10 @@ while True:
         for i, value in enumerate(ui.sprite_values.keys()):
             if ui.menu_option == value:
                 button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 60, 60, None,
-                                   '../Assets/Sprites/UI/box1.png')
+                                   '../assets/sprites/ui/box1.png')
             else:
                 if ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 50, 50, None,
-                             '../Assets/Sprites/UI/box1.png'):
+                             '../assets/sprites/ui/box1.png'):
                     ui.menu_option = value
         # Colour Boxes
         if ui.menu_option != "Gender":
