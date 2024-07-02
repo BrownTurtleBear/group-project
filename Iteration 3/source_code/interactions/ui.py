@@ -68,3 +68,18 @@ class UI:
             else:
                 if pygame.mouse.get_pressed()[0] == 1:
                     return True
+
+    def image_button(self, x, y, button):
+        pos = pygame.mouse.get_pos()
+        button_rect = button[0].get_rect(center=(x, y))
+        self.screen.blit(button[0], button_rect)
+        if button_rect.collidepoint(pos):
+            button_rect = button[1].get_rect(center=(x, y))
+            self.screen.blit(button, button_rect)
+            if pygame.mouse.get_pressed()[0] == 1:
+                self.clicked = True
+            elif self.clicked:
+                self.clicked = False
+                button_rect = button[2].get_rect(center=(x, y))
+                self.screen.blit(button, button_rect)
+                return True

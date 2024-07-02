@@ -6,14 +6,14 @@ class Cooking:
     def __init__(self):
         with open("../text/cooking/recipes.json", "r") as f:
             self.recipes = json.load(f)
-        self.button_default = pygame.image.load("../assets/sprites/UI/Cooking/button_cook_default.png").convert_alpha()
-        self.button_hover = pygame.image.load("../assets/sprites/UI/Cooking/button_cook_hover.png").convert_alpha()
-        self.button_clicked = pygame.image.load("../assets/sprites/UI/Cooking/button_cook_clicked.png").convert_alpha()
+        self.button_default = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_default.png")
+        self.button_hover = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_hover.png")
+        self.button_clicked = pygame.image.load("../Assets/Sprites/ui/Cooking/button_cook_clicked.png")
         self.buttons = [self.button_default, self.button_hover, self.button_clicked]
         self.button_index = 0
         self.button_rect = self.button_default.get_rect()
         self.mouse_pressed_on_button = None
-        self.cooking_book = pygame.image.load("")
+
     def cook(self, ingredients, recipe):
         recipe_to_cook = recipe
         needed_ingredients = self.recipes[recipe_to_cook]
