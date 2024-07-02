@@ -46,7 +46,7 @@ while True:
             playing = True
         else:
             pos = pygame.mouse.get_pos()
-            keys = pygame.key.get_just_released()
+            keys = pygame.key.get_just_pressed()
             if keys[pygame.K_e]:
                 if cookbook_open:
                     cookbook_open = False
