@@ -14,11 +14,11 @@ class Cooking:
         self.button_rect = self.button_default.get_rect()
         self.mouse_pressed_on_button = None
 
-    def cook(self, ingredients, recipe):
+    def cook(self, inventory, recipe):
         recipe_to_cook = recipe
         needed_ingredients = self.recipes[recipe_to_cook]
 
-        if all(ni in ingredients for ni in needed_ingredients):
+        if all(ni in inventory for ni in needed_ingredients):
             return True, recipe_to_cook
         else:
             return False, None
