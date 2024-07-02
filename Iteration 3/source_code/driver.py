@@ -45,31 +45,22 @@ while True:
             screen = pygame.display.set_mode((screen_width, screen_height))
             playing = True
         else:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if inventory_open and event.button == 1:
-                        mouse_x, mouse_y = event.pos
-                        new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
-                        inventory.move_item("Egg", new_position)
-
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_e:
-                        if cookbook_open:
-                            cookbook_open = False
-                        inventory_open = not inventory_open
-                    if event.key == pygame.K_r:
-                        if inventory_open:
-                            inventory_open = False
-                        cookbook_open = not cookbook_open
-                elif event.type == pygame.MOUSEBUTTONUP:
-                    if event.button == 1:
-                        mouse_released = True
-
+            pos = pygame.mouse.get_pos()
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_e]:
+                if cookbook_open:
+                    cookbook_open = False
+                inventory_open = not inventory_open
+            elif keys[pygame.K_r]:
+                if inventory_open:
+                    inventory_open = False
+                cookbook_open = not cookbook_open
             if inventory_open:
                 inventory.open(screen)
-
+                if pygame.mouse.get_pressed()[0] == 1:
+                    mouse_x, mouse_y = pos
+                    new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
+                    inventory.move_item("Egg", new_position)
             if cookbook_open:
                 mouse_pos = pygame.mouse.get_pos()
                 mouse_pressed = pygame.mouse.get_pressed()[0]
