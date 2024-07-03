@@ -5,8 +5,8 @@ from pytmx.util_pygame import load_pygame
 class Map:
     def __init__(self, filename, tilesize, screen):
         self.tmx_data = load_pygame(filename)
-        self.width = 30
-        self.height = 20
+        self.width = 50
+        self.height = 50
         self.tilesize = tilesize
         self.screen = screen
         self.load_sprites()
@@ -14,7 +14,7 @@ class Map:
     def load_sprites(self):
         for i in range(0, self.width):
             for j in range(0, self.height):
-                for l in range(0, 1 ):
+                for l in range(0, 1):
                     gid = self.tmx_data.get_tile_gid(i, j, l)
                     if gid:
                         img = self.tmx_data.get_tile_image_by_gid(gid)
@@ -27,7 +27,7 @@ class Map:
     def redraw(self):
         for i in range(self.width):
             for j in range(self.height):
-                for l in range(0, 2):
+                for l in range(0, 1):
                     gid = self.tmx_data.get_tile_gid(i, j, l)
                     if gid:
                         img = self.tmx_data.get_tile_image_by_gid(gid)
