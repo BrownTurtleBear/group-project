@@ -24,7 +24,7 @@ volume = 50
 ui = UI(screen)
 cooking = Cooking(800, 600)
 inventory = Inventory()
-current_map = Map(".Assets/Sprites/tile/map1.tmx", 16, screen)
+current_map = Map("../Assets/Sprites/tile/map1.tmx", 16, screen)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),

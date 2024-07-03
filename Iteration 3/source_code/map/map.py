@@ -14,7 +14,7 @@ class Map:
     def load_sprites(self):
         for i in range(0, self.width):
             for j in range(0, self.height):
-                for l in range(0, 2):
+                for l in range(0, 1 ):
                     gid = self.tmx_data.get_tile_gid(i, j, l)
                     if gid:
                         img = self.tmx_data.get_tile_image_by_gid(gid)
