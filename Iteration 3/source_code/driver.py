@@ -2,6 +2,7 @@ from interactions.ui import UI
 from cooking.cooking import Cooking
 from items.item import Item
 from items.inventory import Inventory
+from map.map import Map
 
 import pygame
 from sys import exit
@@ -23,6 +24,7 @@ volume = 50
 ui = UI(screen)
 cooking = Cooking(800, 600)
 inventory = Inventory()
+current_map = Map("../Assets/Sprites/tile/map1.tmx", 16, screen)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -45,6 +47,7 @@ while True:
             screen = pygame.display.set_mode((screen_width, screen_height))
             playing = True
         else:
+
             pos = pygame.mouse.get_pos()
             keys = pygame.key.get_just_pressed()
             if keys[pygame.K_e]:
