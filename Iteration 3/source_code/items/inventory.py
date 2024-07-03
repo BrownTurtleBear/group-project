@@ -6,12 +6,19 @@ class Inventory:
         self.image = pygame.image.load('../assets/sprites/items/inventory.png').convert_alpha()
         self.image_rect = self.image.get_rect()
         self.items = {}
+        self.recipes = []
 
     def add_item(self, item, quantity):
         if item.name in self.items:
             self.items[item.name]['quantity'] += quantity
         else:
             self.items[item.name] = {'item': item, 'quantity': quantity}
+
+    def add_recipe(self, recipe):
+        if recipe in self.recipes:
+            return False
+        else:
+            self.recipes.append(recipe)
 
     def open(self, screen):
         screen.blit(self.image, self.image_rect)

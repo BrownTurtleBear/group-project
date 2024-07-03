@@ -1,1 +1,1 @@
-__all__ = ["cooking"]
+__all__ = ["cooking", "recipe"]

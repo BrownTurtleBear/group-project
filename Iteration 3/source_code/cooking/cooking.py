@@ -18,34 +18,30 @@ class Cooking:
         self.cooking_book = pygame.transform.scale(original_cooking_book, (original_width * 5.5, original_height * 5.5))
         self.cooking_book_rect = self.cooking_book.get_rect(center=(screen_width / 2, screen_width / 2))
 
-    def cook(self, ingredients, recipe):
+    def cook(self, inventory, recipe):
         recipe_to_cook = recipe
         needed_ingredients = self.recipes[recipe_to_cook]
 
-        if all(ni in ingredients for ni in needed_ingredients):
+        if all(ni in inventory for ni in needed_ingredients):
             return True, recipe_to_cook
         else:
             return False, None
 
-    def open(self, screen, mouse_pos, mouse_pressed, mouse_released):
-        button_clicked = False
-
+    def open(self, screen):
+        mouse_clicked = pygame.mouse.get_just_pressed()[0]
+        mouse_pos = pygame.mouse.get_pos()
+        activate = False
         if self.button_rect.collidepoint(mouse_pos):
-            if mouse_pressed:
+            if mouse_clicked:
                 self.mouse_pressed_on_button = True
                 screen.blit(self.buttons[2], self.button_rect)
-            elif mouse_released and self.mouse_pressed_on_button:
-                button_clicked = True
-                screen.blit(self.buttons[1], self.button_rect)
-                self.mouse_pressed_on_button = False
+                activate = True
             else:
                 screen.blit(self.buttons[1], self.button_rect)
-        else:
-            if mouse_pressed:
-                self.mouse_pressed_on_button = False
-            screen.blit(self.buttons[0], self.button_rect)
+                activate = False
+        return activate
 
-        return button_clicked
-
-    def book(self, screen):
+    def book(self, screen, inventory):
         screen.blit(self.cooking_book, self.cooking_book_rect)
+        recipe = 0
+        inventory.recipes[recipe].name
