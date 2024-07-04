@@ -102,9 +102,9 @@ while True:
     if menu_section == "settings":
         pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
         ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
-        ui.image(90, 210, 50, 45, '../Assets/Sprites/UI/volume.png')
-        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/UI/arrow_up.png')
-        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow_down.png')
+        ui.image(90, 210, 50, 45, '../assets/sprites/ui/volume.png')
+        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../assets/sprites/ui/arrow_up.png')
+        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../assets/sprites/ui/arrow_down.png')
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         ui.text(screen_width / 2, 60, 50, "Black", "Settings Menu")
         ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
