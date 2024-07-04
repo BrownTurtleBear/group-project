@@ -1,4 +1,7 @@
 import pygame
+from controls.mouse_tracker import MouseTracker
+
+mouse_tracker = MouseTracker()
 
 
 def cook(inventory, recipe):
@@ -32,7 +35,7 @@ class Cooking:
 
     def button_cook(self):
         mouse_pos = pygame.mouse.get_pos()
-        mouse_clicked = pygame.mouse.get_just_pressed()[0]
+        mouse_clicked = mouse_tracker.get_just_pressed()[0]
 
         if self.cook_button_rect.collidepoint(mouse_pos):
             if mouse_clicked:

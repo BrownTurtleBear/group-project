@@ -5,6 +5,7 @@ from items.item import Item
 from items.inventory import Inventory
 from map.map import Map
 from controls.key_tracker import KeyTracker
+from controls.mouse_tracker import MouseTracker
 
 import pygame
 import math
@@ -26,6 +27,7 @@ inventory = Inventory()
 cooking = Cooking(screen, screen_width, inventory)
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
+mouse_tracker = MouseTracker()
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
