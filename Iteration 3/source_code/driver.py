@@ -7,12 +7,10 @@ from map.map import Map
 from controls.key_tracker import KeyTracker
 
 import pygame
-from sys import exit
 import math
 
 pygame.init()
-screen_width = 400
-screen_height = 400
+screen_width, screen_height = 800, 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_icon(pygame.image.load('../assets/sprites/ui/icon.png'))
 pygame.display.set_caption("Love Bites")
@@ -24,8 +22,8 @@ volume = 50
 
 # Classes
 ui = UI(screen)
-cooking = Cooking(800, 600)
 inventory = Inventory()
+cooking = Cooking(screen, screen_width, inventory)
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
 # Items and Inventory
@@ -44,17 +42,16 @@ cookbook_open = False
 
 mouse_released = None
 
-while True:
+running = True
+while running:
     screen.fill('black')
     w, h = screen_width - (x * 2), screen_height - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if menu_section == "start":
         if not playing:
-            screen_width, screen_height = 800, 600
             screen = pygame.display.set_mode((screen_width, screen_height))
             playing = True
         else:
-
             pos = pygame.mouse.get_pos()
             key_tracker.update()
             if KeyTracker.K_e in key_tracker.keys_just_pressed():
@@ -72,16 +69,7 @@ while True:
                     new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
                     inventory.move_item("Egg", new_position)
             if cookbook_open:
-                mouse_pos = pygame.mouse.get_pos()
-                mouse_pressed = pygame.mouse.get_pressed()[0]
-                cooking.book(screen, inventory)
-                if cooking.open(screen):
-                    success, cooked_food = cooking.cook(inventory.items, "Fried Egg on Toast")
-                    if success:
-                        inventory.add_item(cooked_food, 1)
-                        print(f"Successfully cooked {cooked_food}")
-                    else:
-                        print("Couldn't cook the recipe")
+                cooking.book()
 
     if menu_section == "main":
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
@@ -180,10 +168,11 @@ while True:
             menu_section = "main"
         ui.text(screen_width * 0.875, 74, 15, "Black", "Exit")
     if menu_section == "exit":
-        pygame.quit()
-        exit()
+        running = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
+            running = False
     pygame.display.update()
     clock.tick(60)
+
+pygame.quit()
