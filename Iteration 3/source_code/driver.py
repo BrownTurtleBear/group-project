@@ -71,7 +71,6 @@ while running:
                     inventory.move_item("Egg", new_position)
             if cookbook_open:
                 cooking.book()
-
     if menu_section == "main":
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         start_button = ui.button("rect", False, screen_width / 2 - 80, screen_height / 2 - 90, 170, 80, "Green", None)

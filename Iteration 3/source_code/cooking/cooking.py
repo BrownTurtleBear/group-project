@@ -36,7 +36,6 @@ class Cooking:
     def button_cook(self):
         mouse_pos = pygame.mouse.get_pos()
         mouse_clicked = mouse_tracker.get_just_pressed()[0]
-
         if self.cook_button_rect.collidepoint(mouse_pos):
             if mouse_clicked:
                 self.screen.blit(self.cook_buttons[2], self.cook_button_rect)
