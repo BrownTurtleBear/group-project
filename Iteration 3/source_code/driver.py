@@ -1,5 +1,6 @@
 from interactions.ui import UI
 from cooking.cooking import Cooking
+from cooking.recipe import Recipe
 from items.item import Item
 from items.inventory import Inventory
 from map.map import Map
@@ -24,14 +25,18 @@ volume = 50
 ui = UI(screen)
 cooking = Cooking(800, 600)
 inventory = Inventory()
-current_map = Map("../Assets/Sprites/tile/map1.tmx", 16, screen)
+current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
     "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
 }
+recipes = {
+    "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast.")
+}
 inventory.add_item(items["Egg"], 1)
 inventory.add_item(items["Bread"], 1)
+inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory_open = False
 cookbook_open = False
 
