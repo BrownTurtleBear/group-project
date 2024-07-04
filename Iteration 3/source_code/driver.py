@@ -51,7 +51,6 @@ while running:
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if menu_section == "start":
         if not playing:
-            screen = pygame.display.set_mode((screen_width, screen_height))
             playing = True
         else:
             pos = pygame.mouse.get_pos()
