@@ -57,11 +57,11 @@ while True:
 
             pos = pygame.mouse.get_pos()
             key_tracker.update()
-            if key_tracker[key_tracker.K_e]:
+            if KeyTracker.K_e in key_tracker.keys_just_pressed():
                 if cookbook_open:
                     cookbook_open = False
                 inventory_open = not inventory_open
-            elif key_tracker[key_tracker.K_r]:
+            elif KeyTracker.K_r in key_tracker.keys_just_pressed():
                 if inventory_open:
                     inventory_open = False
                 cookbook_open = not cookbook_open

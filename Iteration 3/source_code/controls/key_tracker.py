@@ -104,17 +104,17 @@ class KeyTracker:
 
     def __init__(self):
         self.keys_pressed = set()
-        self.keys_just_pressed = set()
+        self._keys_just_pressed = set()  # Renamed to _keys_just_pressed
 
     def update(self):
-        self.keys_just_pressed.clear()
+        self._keys_just_pressed.clear()
         for event in pygame.event.get(pygame.KEYDOWN):
             if event.key not in self.keys_pressed:
-                self.keys_just_pressed.add(event.key)
+                self._keys_just_pressed.add(event.key)
                 self.keys_pressed.add(event.key)
 
         for event in pygame.event.get(pygame.KEYUP):
             self.keys_pressed.discard(event.key)
 
-    def __getitem__(self, key):
-        return key in self.keys_just_pressed
+    def keys_just_pressed(self):
+        return self._keys_just_pressed
