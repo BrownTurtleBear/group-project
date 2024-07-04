@@ -24,7 +24,7 @@ volume = 50
 ui = UI(screen)
 cooking = Cooking(800, 600)
 inventory = Inventory()
-current_map = Map("../Assets/Sprites/tile/map1.tmx", 16, screen)
+current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -97,7 +97,7 @@ while True:
     if menu_section == "settings":
         pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
         ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
-        ui.image(90, 210, 50, 45, '../Assets/Sprites/UI/volume.png')
+        ui.image(90, 210, 50, 45, '../assets/sprites/ui/volume.png')
         up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/UI/arrow_up.png')
         down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow_down.png')
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
