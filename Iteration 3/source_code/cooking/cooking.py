@@ -3,7 +3,6 @@ import pygame
 
 def cook(inventory, recipe):
     needed_ingredients = inventory.recipes[recipe]
-
     if all(ni in inventory for ni in needed_ingredients):
         return True
     else:
@@ -33,7 +32,7 @@ class Cooking:
 
     def button_cook(self):
         mouse_pos = pygame.mouse.get_pos()
-        mouse_clicked = pygame.mouse.get_pressed()[0]
+        mouse_clicked = pygame.mouse.get_just_pressed()[0]
 
         if self.cook_button_rect.collidepoint(mouse_pos):
             if mouse_clicked:
@@ -49,7 +48,7 @@ class Cooking:
     def book(self):
         self.screen.blit(self.cooking_book, self.cooking_book_rect)
         recipe_index = 0
-        button_pressed = self.button_cook()  # This will draw the button
+        button_pressed = self.button_cook()
         if button_pressed:
             if not cook(self.inventory, recipe_index):
                 return False
