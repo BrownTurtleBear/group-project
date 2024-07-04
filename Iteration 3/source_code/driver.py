@@ -4,6 +4,7 @@ from cooking.recipe import Recipe
 from items.item import Item
 from items.inventory import Inventory
 from map.map import Map
+from controls.key_tracker import KeyTracker
 
 import pygame
 from sys import exit
@@ -26,6 +27,7 @@ ui = UI(screen)
 cooking = Cooking(800, 600)
 inventory = Inventory()
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
+key_tracker = KeyTracker()
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -54,12 +56,12 @@ while True:
         else:
 
             pos = pygame.mouse.get_pos()
-            keys = pygame.key.get_just_pressed()
-            if keys[pygame.K_e]:
+            key_tracker.update()
+            if key_tracker[key_tracker.K_e]:
                 if cookbook_open:
                     cookbook_open = False
                 inventory_open = not inventory_open
-            elif keys[pygame.K_r]:
+            elif key_tracker[key_tracker.K_r]:
                 if inventory_open:
                     inventory_open = False
                 cookbook_open = not cookbook_open
