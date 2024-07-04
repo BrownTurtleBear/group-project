@@ -1,5 +1,6 @@
 from interactions.ui import UI
 from cooking.cooking import Cooking
+from cooking.recipe import Recipe
 from items.item import Item
 from items.inventory import Inventory
 from map.map import Map
@@ -30,8 +31,12 @@ items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
     "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
 }
+recipes = {
+    "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast.")
+}
 inventory.add_item(items["Egg"], 1)
 inventory.add_item(items["Bread"], 1)
+inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory_open = False
 cookbook_open = False
 
@@ -98,8 +103,8 @@ while True:
         pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
         ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
         ui.image(90, 210, 50, 45, '../assets/sprites/ui/volume.png')
-        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../Assets/Sprites/UI/arrow_up.png')
-        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../Assets/Sprites/UI/arrow_down.png')
+        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../assets/sprites/ui/arrow_up.png')
+        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../assets/sprites/ui/arrow_down.png')
         exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
         ui.text(screen_width / 2, 60, 50, "Black", "Settings Menu")
         ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
