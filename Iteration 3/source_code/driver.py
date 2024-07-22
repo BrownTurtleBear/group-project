@@ -56,17 +56,6 @@ while running:
             if KeyTracker.K_e in key_tracker.keys_just_pressed():
                 if cookbook_open:
                     cookbook_open = False
-                inventory_open = not inventory_open
-            elif KeyTracker.K_r in key_tracker.keys_just_pressed():
-                if inventory_open:
-                    inventory_open = False
-                cookbook_open = not cookbook_open
-            if inventory_open:
-                inventory.open(screen)
-                if pygame.mouse.get_pressed()[0] == 1:
-                    mouse_x, mouse_y = pos
-                    new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
-                    inventory.move_item("Egg", new_position)
             if cookbook_open:
                 cooking.book()
     if menu_section == "main":
