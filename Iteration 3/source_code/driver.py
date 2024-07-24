@@ -27,10 +27,10 @@ volume = 50
 # Classes
 ui = UI(screen)
 inventory = Inventory()
-cooking = Cooking(screen, screen_width, inventory)
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
+cooking = Cooking(screen, screen_width, inventory, mouse_tracker)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -39,8 +39,6 @@ items = {
 recipes = {
     "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast.")
 }
-inventory.add_item(items["Egg"], 1)
-inventory.add_item(items["Bread"], 1)
 inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory_open = False
 cookbook_open = False
@@ -61,17 +59,6 @@ while running:
             if KeyTracker.K_e in key_tracker.keys_just_pressed():
                 if cookbook_open:
                     cookbook_open = False
-                inventory_open = not inventory_open
-            elif KeyTracker.K_r in key_tracker.keys_just_pressed():
-                if inventory_open:
-                    inventory_open = False
-                cookbook_open = not cookbook_open
-            if inventory_open:
-                inventory.open(screen)
-                if pygame.mouse.get_pressed()[0] == 1:
-                    mouse_x, mouse_y = pos
-                    new_position = (mouse_x - inventory.image_rect.x, mouse_y - inventory.image_rect.y)
-                    inventory.move_item("Egg", new_position)
             if cookbook_open:
                 cooking.book()
             current_map.redraw()
