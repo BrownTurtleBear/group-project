@@ -13,9 +13,9 @@ import math
 pygame.init()
 tile_size = (16, 16)
 tiles_amount = (50, 50)
-screen_width, screen_height = tile_size[0]*tiles_amount[0], tile_size[1]*tiles_amount[1]
-screen_width, screen_height = 400, 400
-screen = pygame.display.set_mode((screen_width, screen_height))
+screen_width, screen_height = tile_size[0] * tiles_amount[0], tile_size[1] * tiles_amount[1]
+sc_w, sc_h = 800, 600
+screen = pygame.display.set_mode((sc_w, sc_h))
 pygame.display.set_icon(pygame.image.load('../assets/sprites/ui/icon.png'))
 pygame.display.set_caption("Love Bites")
 clock = pygame.time.Clock()
@@ -30,7 +30,7 @@ inventory = Inventory()
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
-cooking = Cooking(screen, screen_width, inventory, mouse_tracker)
+cooking = Cooking(screen, sc_w, inventory, mouse_tracker)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -48,7 +48,7 @@ mouse_released = None
 running = True
 while running:
     screen.fill('black')
-    w, h = screen_width - (x * 2), screen_height - (x * 2)
+    w, h = sc_w - (x * 2), sc_h - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
     if menu_section == "start":
         if not playing:
@@ -63,15 +63,15 @@ while running:
                 cooking.book()
             current_map.redraw()
     if menu_section == "main":
-        exit_button = ui.button("rect", False, screen_width * 0.825, screen_height * 0.025, screen_width * 0.15, screen_height * 0.075, "Red", None)
-        start_button = ui.button("rect", False, screen_width * 0.3, screen_height * 0.275, screen_width * 0.425, screen_height * 0.2, "Green", None)
-        character_button = ui.button("rect", False, screen_width * 0.3, screen_height * 0.5, screen_width * 0.425, screen_height * 0.2, "Blue", None)
-        settings_button = ui.button("rect", False, screen_width * 0.3, screen_height * 0.725, screen_width * 0.425, screen_height * 0.2, "Grey", None)
-        ui.text(screen_width * 0.5, screen_height * 0.15, int(screen_height * 0.15), "Black", "Love Bites")
-        ui.text(screen_width * 0.9, screen_height * 0.06, int(screen_width * 0.0375), "Black", "Exit")
-        ui.text(screen_width * 0.5125, screen_height * 0.375, int(screen_height * 0.09), "Black", "Start")
-        ui.text(screen_width * 0.5125, screen_height * 0.6, int(screen_height * 0.09), "White", "Character")
-        ui.text(screen_width * 0.5125, screen_height * 0.825, int(screen_height * 0.09), "Black", "Settings")
+        exit_button = ui.button("rect", False, sc_w * 0.825, sc_h * 0.025, sc_w * 0.15, sc_h * 0.075, "Red", None)
+        start_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.275, sc_w * 0.425, sc_h * 0.2, "Green", None)
+        character_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.5, sc_w * 0.425, sc_h * 0.2, "Blue", None)
+        settings_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.725, sc_w * 0.425, sc_h * 0.2, "Grey", None)
+        ui.text(sc_w * 0.5, sc_h * 0.15, int(sc_h * 0.15), "Black", "Love Bites")
+        ui.text(sc_w * 0.9, sc_h * 0.06, int(sc_w * 0.04), "Black", "Exit")
+        ui.text(sc_w * 0.5125, sc_h * 0.375, int(sc_h * 0.09), "Black", "Start")
+        ui.text(sc_w * 0.5125, sc_h * 0.6, int(sc_h * 0.09), "White", "Character")
+        ui.text(sc_w * 0.5125, sc_h * 0.825, int(sc_h * 0.09), "Black", "Settings")
         if exit_button:
             menu_section = "exit"
         if start_button:
@@ -81,16 +81,18 @@ while running:
         if settings_button:
             menu_section = "settings"
     if menu_section == "settings":
-        pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
-        ui.outlined_rect(screen_width / 6, screen_height / 4, screen_width / 3, screen_height / 2, 3, "White")
-        ui.image(screen_width * 0.225, screen_height * 0.525, screen_width * 0.125, screen_height * 0.1125, '../assets/sprites/ui/volume.png')
-        up_button = ui.button("img", True, 135, 160, 45, 45, None, '../assets/sprites/ui/arrow_up.png')
-        down_button = ui.button("img", True, 135, 260, 45, 45, None, '../assets/sprites/ui/arrow_down.png')
-        exit_button = ui.button("rect", False, screen_width - 70, 10, 60, 30, "Red", None)
-        ui.text(screen_width / 2, 60, 50, "Black", "Settings Menu")
-        ui.text(screen_width / 3, screen_height / 3 - 10, 25, "Black", "Volume")
-        ui.text(screen_width / 4 + 35, screen_height / 2 + 10, 25, "Black", str(volume))
-        ui.text(screen_width - 39, 24, 15, "Black", "Exit")
+        pygame.draw.rect(screen, "Grey", pygame.Rect(x, y, sc_w - (x * 2), sc_h - (x * 2)))
+        ui.outlined_rect(sc_w / 6, sc_h / 4, sc_w / 3, sc_h / 2, 3, "White")
+        ui.image(sc_w * 0.225, sc_h * 0.525, sc_w * 0.125, sc_h * 0.1125, '../assets/sprites/ui/volume.png')
+        up_button = ui.button("img", True, sc_w * 0.3375, sc_h * 0.4, sc_h * 0.1125, sc_h * 0.1125, None,
+                              '../assets/sprites/ui/arrow_up.png')
+        down_button = ui.button("img", True, sc_w * 0.3375, sc_h * 0.65, sc_h * 0.1125, sc_h * 0.1125, None,
+                                '../assets/sprites/ui/arrow_down.png')
+        exit_button = ui.button("rect", False, sc_w * 0.825, sc_h * 0.025, sc_w * 0.15, sc_h * 0.075, "Red", None)
+        ui.text(sc_w / 2, sc_h * 0.15, int(sc_h * 0.125), "Black", "Settings Menu")
+        ui.text(sc_w / 3, sc_h / 3 - sc_h * 0.025, int(sc_w * 0.06), "Black", "Volume")
+        ui.text(sc_w * 0.3375, sc_h / 2 + sc_h * 0.025, int(sc_w * 0.06), "Black", str(volume))
+        ui.text(sc_w * 0.9, sc_h * 0.06, int(sc_w * 0.04), "Black", "Exit")
         if up_button and volume < 100:
             volume += 1
         if down_button and volume > 0:
@@ -98,28 +100,28 @@ while running:
         if exit_button:
             menu_section = "main"
     if menu_section == "character":
-        pygame.draw.rect(screen, (3, 7, 252), pygame.Rect(x, y, screen_width - (x * 2), screen_height - (x * 2)))
-        ui.outlined_rect(x * 2, screen_height * 0.5, screen_width - (x * 4), screen_height * 0.45, 3, (200, 255, 255))
-        ui.text(screen_width / 2, 35, 30, "White", "Character Customisation")
+        pygame.draw.rect(screen, (3, 7, 252), pygame.Rect(x, y, sc_w - (x * 2), sc_h - (x * 2)))
+        ui.outlined_rect(x * 2, sc_h * 0.5, sc_w - (x * 4), sc_h * 0.45, 3, (200, 255, 255))
+        ui.text(sc_w / 2, sc_h * 0.0875, int(sc_w * 0.075), "White", "Character Customisation")
         # Section Boxes
         for i, value in enumerate(ui.sprite_values.keys()):
             if ui.menu_option == value:
-                button = ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 60, 60, None,
-                                   '../assets/sprites/ui/box1.png')
+                button = ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4375,
+                                   sc_w * 0.15, sc_w * 0.15, None, '../assets/sprites/ui/box1.png')
             else:
-                if ui.button("img", True, (x * 2) + (50 / 2) + (50 * i), 175, 50, 50, None,
-                             '../assets/sprites/ui/box1.png'):
+                if ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4375,
+                             sc_w * 0.125, sc_w * 0.125, None, '../assets/sprites/ui/box1.png'):
                     ui.menu_option = value
         # Colour Boxes
         if ui.menu_option != "Gender":
-            ui.outlined_rect(x * 3, screen_height * 0.58,
-                             (screen_width - (x * 4)) * 0.5, screen_height / 2.5 - x * 2, 3, "White")
-            ui.outlined_rect((screen_width - (x * 4) * 0.5) / 2 + 10, screen_height * 0.58,
-                             (screen_width - (x * 4)) * 0.5 - 10, screen_height / 2.5 - x * 2, 3, "White")
+            ui.outlined_rect(x * 3, sc_h * 0.58,
+                             (sc_w - (x * 4)) * 0.5, sc_h / 2.5 - x * 2, 3, "White")
+            ui.outlined_rect((sc_w - (x * 4) * 0.5) / 2 + 10, sc_h * 0.58,
+                             (sc_w - (x * 4)) * 0.5 - 10, sc_h / 2.5 - x * 2, 3, "White")
             # Menu Text
-            ui.text(screen_width / 2, screen_height / 2 + 15, 25, "Black", ui.menu_option)
-            ui.text((screen_width - (x * 4) * 0.5) / 4 + 20, screen_height * 0.6 + 10, 20, "Black", "Style")
-            ui.text((screen_width - (x * 4) * 0.6) * 0.75, screen_height * 0.6 + 10, 20, "Black", "Colour")
+            ui.text(sc_w / 2, sc_h / 2 + 15, 25, "Black", ui.menu_option)
+            ui.text((sc_w - (x * 4) * 0.5) / 4 + 20, sc_h * 0.6 + 10, 20, "Black", "Style")
+            ui.text((sc_w - (x * 4) * 0.6) * 0.75, sc_h * 0.6 + 10, 20, "Black", "Colour")
             for i, value in enumerate(ui.colours_dict[ui.menu_option]):
                 if i - 6 < 0:
                     x_temp = i
@@ -130,34 +132,34 @@ while running:
                     temp1 = "Grey"
                 else:
                     temp1 = "Black"
-                colour_button = ui.button("rect", False, (screen_width - (x * 4) * 0.5) / 1.8 + (25 * x_temp),
-                                          screen_height * 0.7 + (25 * y_temp), x * 2, y * 2, value, None)
+                colour_button = ui.button("rect", False, (sc_w - (x * 4) * 0.5) / 1.8 + (25 * x_temp),
+                                          sc_h * 0.7 + (25 * y_temp), x * 2, y * 2, value, None)
                 if colour_button:
                     ui.sprite_values[ui.menu_option][0] = value
         else:
-            ui.outlined_rect(x * 3, screen_height * 0.58, (screen_width - (x * 6)), screen_height / 2.5 - x * 2, 3,
+            ui.outlined_rect(x * 3, sc_h * 0.58, (sc_w - (x * 6)), sc_h / 2.5 - x * 2, 3,
                              "White")
-            ui.text(screen_width / 2, screen_height / 2 + 15, 25, "Black", ui.menu_option)
+            ui.text(sc_w / 2, sc_h / 2 + 15, 25, "Black", ui.menu_option)
             genders = ["Male", "Female", "None"]
             for i, value in enumerate(genders):
-                ui.text(screen_width * 0.2, screen_height * 0.7, 25, "Black", "Male")
-                ui.text(screen_width * 0.5, screen_height * 0.7, 25, "Black", "Female")
-                ui.text(screen_width * 0.8, screen_height * 0.7, 25, "Black", "None")
+                ui.text(sc_w * 0.2, sc_h * 0.7, 25, "Black", "Male")
+                ui.text(sc_w * 0.5, sc_h * 0.7, 25, "Black", "Female")
+                ui.text(sc_w * 0.8, sc_h * 0.7, 25, "Black", "None")
                 # Buttons
                 if ui.sprite_values["Gender"] == value:
-                    gender_button = ui.button("rect", False, 50 + (120 * i), screen_height * 0.75, screen_width / 6,
-                                              screen_height / 8 - 10, "Green", None)
+                    gender_button = ui.button("rect", False, 50 + (120 * i), sc_h * 0.75, sc_w / 6,
+                                              sc_h / 8 - 10, "Green", None)
 
                 else:
-                    gender_button = ui.button("rect", False, 50 + (120 * i), screen_height * 0.75, screen_width / 6,
-                                              screen_height / 8 - 10, "Red", None)
-                ui.text(screen_width * 0.2 + (120 * i), screen_height * 0.8, 25, "Black", "Pick")
+                    gender_button = ui.button("rect", False, 50 + (120 * i), sc_h * 0.75, sc_w / 6,
+                                              sc_h / 8 - 10, "Red", None)
+                ui.text(sc_w * 0.2 + (120 * i), sc_h * 0.8, 25, "Black", "Pick")
                 if gender_button:
                     ui.sprite_values["Gender"] = value
-        exit_button = ui.button("rect", False, screen_width * 0.8, 60, 60, 30, "Red", None)
+        exit_button = ui.button("rect", False, sc_w * 0.8, 60, 60, 30, "Red", None)
         if exit_button:
             menu_section = "main"
-        ui.text(screen_width * 0.875, 74, 15, "Black", "Exit")
+        ui.text(sc_w * 0.875, 74, 15, "Black", "Exit")
     if menu_section == "exit":
         running = False
     for event in pygame.event.get():

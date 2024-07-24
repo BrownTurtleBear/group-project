@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class UI:
@@ -44,7 +45,7 @@ class UI:
         pos = pygame.mouse.get_pos()
         if type == "rect":
             button_rect = pygame.draw.rect(self.screen, colour, pygame.Rect(x, y, width, height))
-            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 1)
+            pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), math.ceil(width/100))
         elif type == "img":
             button = pygame.image.load(location).convert_alpha()
             button = pygame.transform.scale(button, (width, height))
@@ -54,7 +55,7 @@ class UI:
             button, button_rect = None, None
         if button_rect.collidepoint(pos):
             if type == "rect":
-                pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), 3)
+                pygame.draw.rect(self.screen, "Black", pygame.Rect(x, y, width, height), math.ceil(width/50))
             elif type == "img":
                 button = pygame.transform.scale(button, (width, height))
                 button_rect = button.get_rect(center=(x, y))
