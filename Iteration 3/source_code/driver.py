@@ -132,8 +132,8 @@ while running:
                     temp1 = "Grey"
                 else:
                     temp1 = "Black"
-                colour_button = ui.button("rect", False, (sc_w - (x * 4) * 0.5) / 1.8 + (25 * x_temp),
-                                          sc_h * 0.7 + (25 * y_temp), x * 2, y * 2, value, None)
+                colour_button = ui.button("rect", False, (sc_w - (x * 4) * 0.5) / 1.8 + ((sc_w * 0.0625) * x_temp),
+                                          sc_h * 0.7 + ((sc_w * 0.0625) * y_temp), x * (sc_w * 0.005), y * (sc_w * 0.005), value, None)
                 if colour_button:
                     ui.sprite_values[ui.menu_option][0] = value
         else:
@@ -158,7 +158,7 @@ while running:
         exit_button = ui.button("rect", False, sc_w * 0.8, sc_h * 0.15, sc_w * 0.15, sc_h * 0.075, "Red", None)
         if exit_button:
             menu_section = "main"
-        ui.text(sc_w * 0.875, 74, 15, "Black", "Exit")
+        ui.text(sc_w * 0.875, sc_h * 0.185, int(sc_w * 0.04), "Black", "Exit")
     if menu_section == "exit":
         running = False
     for event in pygame.event.get():
