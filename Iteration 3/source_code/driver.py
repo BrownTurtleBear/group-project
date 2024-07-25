@@ -27,7 +27,7 @@ inventory = Inventory()
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
-cooking = Cooking(screen, inventory)
+cooking = Cooking(screen, screen_width, inventory, mouse_tracker)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
@@ -36,8 +36,6 @@ items = {
 recipes = {
     "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast.")
 }
-inventory.add_item(items["Egg"], 1)
-inventory.add_item(items["Bread"], 1)
 inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory_open = False
 cookbook_open = False
@@ -58,8 +56,6 @@ while running:
             if KeyTracker.K_r in key_tracker.keys_just_pressed():
                 if cookbook_open:
                     cookbook_open = False
-                else:
-                    cookbook_open = True
             if cookbook_open:
                 cooking.book()
     if menu_section == "main":
@@ -163,7 +159,6 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
     pygame.display.update()
     clock.tick(60)
 
