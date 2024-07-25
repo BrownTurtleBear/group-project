@@ -101,27 +101,27 @@ while running:
             menu_section = "main"
     if menu_section == "character":
         pygame.draw.rect(screen, (3, 7, 252), pygame.Rect(x, y, sc_w - (x * 2), sc_h - (x * 2)))
-        ui.outlined_rect(x * 2, sc_h * 0.5, sc_w - (x * 4), sc_h * 0.45, 3, (200, 255, 255))
+        ui.outlined_rect(x * 2, sc_h * 0.5, sc_w - (x * 4), sc_h * 0.5 - (x * 2), 3, (200, 255, 255))
         ui.text(sc_w / 2, sc_h * 0.0875, int(sc_w * 0.075), "White", "Character Customisation")
         # Section Boxes
         for i, value in enumerate(ui.sprite_values.keys()):
             if ui.menu_option == value:
-                button = ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4375,
+                button = ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4,
                                    sc_w * 0.15, sc_w * 0.15, None, '../assets/sprites/ui/box1.png')
             else:
-                if ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4375,
+                if ui.button("img", True, ((x * 2) + (sc_w * 0.0625) + (sc_w * 0.125 * i)), sc_h * 0.4,
                              sc_w * 0.125, sc_w * 0.125, None, '../assets/sprites/ui/box1.png'):
                     ui.menu_option = value
         # Colour Boxes
         if ui.menu_option != "Gender":
             ui.outlined_rect(x * 3, sc_h * 0.58,
-                             (sc_w - (x * 4)) * 0.5, sc_h / 2.5 - x * 2, 3, "White")
+                             (sc_w - (x * 4)) * 0.5, sc_h * 0.4 - x * 2, 3, "White")
             ui.outlined_rect((sc_w - (x * 4) * 0.5) / 2 + 10, sc_h * 0.58,
                              (sc_w - (x * 4)) * 0.5 - 10, sc_h / 2.5 - x * 2, 3, "White")
             # Menu Text
-            ui.text(sc_w / 2, sc_h / 2 + 15, 25, "Black", ui.menu_option)
-            ui.text((sc_w - (x * 4) * 0.5) / 4 + 20, sc_h * 0.6 + 10, 20, "Black", "Style")
-            ui.text((sc_w - (x * 4) * 0.6) * 0.75, sc_h * 0.6 + 10, 20, "Black", "Colour")
+            ui.text(sc_w / 2, sc_h / 2 + sc_h * 0.04, int(sc_h * 0.0625), "Black", ui.menu_option)
+            ui.text((sc_w - (x * 4) * 0.5) / 4, sc_h * 0.6 + sc_h * 0.025, int(sc_h * 0.05), "Black", "Style")
+            ui.text((sc_w - (x * 4) * 0.6) * 0.75, sc_h * 0.6 + 10, int(sc_h * 0.05), "Black", "Colour")
             for i, value in enumerate(ui.colours_dict[ui.menu_option]):
                 if i - 6 < 0:
                     x_temp = i
@@ -137,26 +137,25 @@ while running:
                 if colour_button:
                     ui.sprite_values[ui.menu_option][0] = value
         else:
-            ui.outlined_rect(x * 3, sc_h * 0.58, (sc_w - (x * 6)), sc_h / 2.5 - x * 2, 3,
-                             "White")
-            ui.text(sc_w / 2, sc_h / 2 + 15, 25, "Black", ui.menu_option)
+            ui.outlined_rect(x * 3, sc_h * 0.58, (sc_w - (x * 6)), sc_h / 2.5 - x * 2, 3, "White")
+            ui.text(sc_w / 2, sc_h / 2 + sc_h * 0.04, int(sc_h * 0.0625), "Black", ui.menu_option)
             genders = ["Male", "Female", "None"]
             for i, value in enumerate(genders):
-                ui.text(sc_w * 0.2, sc_h * 0.7, 25, "Black", "Male")
-                ui.text(sc_w * 0.5, sc_h * 0.7, 25, "Black", "Female")
-                ui.text(sc_w * 0.8, sc_h * 0.7, 25, "Black", "None")
+                ui.text(sc_w * 0.2, sc_h * 0.7, int(sc_h * 0.0625), "Black", "Male")
+                ui.text(sc_w * 0.5, sc_h * 0.7, int(sc_h * 0.0625), "Black", "Female")
+                ui.text(sc_w * 0.8, sc_h * 0.7, int(sc_h * 0.0625), "Black", "None")
                 # Buttons
                 if ui.sprite_values["Gender"] == value:
-                    gender_button = ui.button("rect", False, 50 + (120 * i), sc_h * 0.75, sc_w / 6,
-                                              sc_h / 8 - 10, "Green", None)
+                    gender_button = ui.button("rect", False, sc_w * 0.125 + (sc_w * 0.3 * i), sc_h * 0.75, sc_w / 6,
+                                              sc_h / 8 - sc_h * 0.025, "Green", None)
 
                 else:
-                    gender_button = ui.button("rect", False, 50 + (120 * i), sc_h * 0.75, sc_w / 6,
-                                              sc_h / 8 - 10, "Red", None)
-                ui.text(sc_w * 0.2 + (120 * i), sc_h * 0.8, 25, "Black", "Pick")
+                    gender_button = ui.button("rect", False, sc_w * 0.125 + (sc_w * 0.3 * i), sc_h * 0.75, sc_w / 6,
+                                              sc_h / 8 - sc_h * 0.025, "Red", None)
+                ui.text(sc_w * 0.2 + (sc_w * 0.3 * i), sc_h * 0.8, int(sc_h * 0.0625), "Black", "Pick")
                 if gender_button:
                     ui.sprite_values["Gender"] = value
-        exit_button = ui.button("rect", False, sc_w * 0.8, 60, 60, 30, "Red", None)
+        exit_button = ui.button("rect", False, sc_w * 0.8, sc_h * 0.15, sc_w * 0.15, sc_h * 0.075, "Red", None)
         if exit_button:
             menu_section = "main"
         ui.text(sc_w * 0.875, 74, 15, "Black", "Exit")
