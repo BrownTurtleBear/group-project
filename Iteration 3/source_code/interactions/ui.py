@@ -39,9 +39,9 @@ class UI:
         pygame.draw.rect(self.screen, "Black", pygame.Rect((x, y), (w, h)), outline)
 
     def image_button(self, x, y, button):
-                button_rect = button[2].get_rect(center=(x, y))
-                self.screen.blit(button, button_rect)
-                return True
+        button_rect = button[2].get_rect(center=(x, y))
+        self.screen.blit(button, button_rect)
+        return True
 
     def better_image_button(self, button, point, x_pos, y_pos):
         mouse_pos = pygame.mouse.get_pos()
