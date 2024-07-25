@@ -1,6 +1,7 @@
 import pygame
 from interactions.ui import UI
 
+
 def cook(inventory, recipe):
     needed_ingredients = inventory.recipes[recipe]
     if all(ni in inventory for ni in needed_ingredients):
@@ -24,7 +25,8 @@ class Cooking:
     def book(self):
         self.screen.blit(self.cooking_book, self.cooking_book_rect)
         recipe_index = 0
-        cook_pressed = self.ui.better_image_button("cook", "bottomright", self.cooking_book_rect.right - 85, self.cooking_book_rect.bottom - 130)
+        cook_pressed = self.ui.better_image_button("cook", "bottomright", self.cooking_book_rect.right - 85,
+                                                   self.cooking_book_rect.bottom - 130)
         if cook_pressed and cook(self.inventory, recipe_index):
             print(f"cooked {self.inventory.recipes[recipe_index].name}")
             return True
