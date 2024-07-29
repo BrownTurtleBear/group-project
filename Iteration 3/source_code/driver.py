@@ -31,13 +31,16 @@ cooking = Cooking(screen, inventory)
 
 # Items and Inventory
 items = {
-    "Egg": Item("Egg", (0, 2), (40, 60), "Just an egg."),
-    "Bread": Item("Bread", (2, 3), (30, 40), "One loaf."),
+    "Egg": Item("Egg", (0, 2), "Just an egg."),
+    "Bread": Item("Bread", (2, 3),  "One loaf."),
+    "Rice": Item("Rice", (4, 5), "White Bits")
 }
 recipes = {
-    "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast.")
+    "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast."),
+    "Sushi": Recipe("Sushi", [items["Rice"]], "Japanese yummy")
 }
 inventory.add_recipe(recipes["Fried Egg on Toast"])
+inventory.add_recipe(recipes["Sushi"])
 inventory_open = False
 cookbook_open = False
 

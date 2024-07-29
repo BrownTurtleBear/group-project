@@ -1,5 +1,5 @@
 class Recipe:
-    def __init__(self, name, items, description=None):
+    def __init__(self, name, ingredients, description=None):
         self.name = name
-        self.items = items
+        self.ingredients = ingredients
         self.description = description
