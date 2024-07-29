@@ -3,10 +3,10 @@ from cooking.cooking import Cooking
 from cooking.recipe import Recipe
 from items.item import Item
 from items.inventory import Inventory
-from map.map import Map
+from maps.map import Map
 from controls.key_tracker import KeyTracker
 from controls.mouse_tracker import MouseTracker
-from player.player import Player
+#from players.player import Player
 
 import pygame
 import math
@@ -28,8 +28,8 @@ volume = 50
 # Classes
 ui = UI(screen)
 inventory = Inventory()
-player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
-current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
+#player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
+current_map = Map("../assets/sprites/tile/map1.tmx", tile_size, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
 cooking = Cooking(screen, sc_w, inventory, mouse_tracker)

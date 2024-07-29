@@ -7,9 +7,9 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.facing = "right"
         self.image = pygame.image.load("../assets/sprites/ui/icon.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, player_size)
-        self.image_rect = self.image.get_rect()
-        self.position, self.velocity = pygame.math.Vector2(pos), pygame.math.Vector2(0, 0)
+        self.sprite = pygame.transform.scale(self.image, player_size)
+        self.rect = self.image.get_rect()
+        self.position, self.direction = pygame.math.Vector2(pos), pygame.math.Vector2(0, 0)
         self.speed = 1.3
 
     def get_input(self):
