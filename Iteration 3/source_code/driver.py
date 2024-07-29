@@ -28,6 +28,7 @@ volume = 50
 # Classes
 ui = UI(screen)
 inventory = Inventory()
+player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
 current_map = Map("../assets/sprites/tile/map1.tmx", 16, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
@@ -62,8 +63,7 @@ while running:
                     cookbook_open = False
             if cookbook_open:
                 cooking.book()
-            current_map.redraw()
-            player.
+            current_map.run()
     if menu_section == "main":
         exit_button = ui.button("rect", False, sc_w * 0.825, sc_h * 0.025, sc_w * 0.15, sc_h * 0.075, "Red", None)
         start_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.275, sc_w * 0.425, sc_h * 0.2, "Green", None)
