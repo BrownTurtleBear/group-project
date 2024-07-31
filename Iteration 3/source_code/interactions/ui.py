@@ -26,45 +26,6 @@ class UI:
         }
         self.style_dict = {}
 
-        # Button cook
-        # Load
-        button_cook_default = pygame.image.load("../assets/sprites/ui/cooking/button_cook_default.png").convert_alpha()
-        button_cook_hover = pygame.image.load("../assets/sprites/ui/cooking/button_cook_hover.png").convert_alpha()
-        button_cook_clicked = pygame.image.load("../assets/sprites/ui/cooking/button_cook_clicked.png").convert_alpha()
-        # Scale
-        button_cook_default_scaled = pygame.transform.scale(button_cook_default, (
-            button_cook_default.get_width() * 0.9, button_cook_default.get_height() * 0.9))
-        button_cook_hover_scaled = pygame.transform.scale(button_cook_hover, (
-            button_cook_hover.get_width() * 0.9, button_cook_hover.get_height() * 0.9))
-        button_cook_clicked_scaled = pygame.transform.scale(button_cook_clicked, (
-            button_cook_clicked.get_width() * 0.9, button_cook_clicked.get_height() * 0.9))
-
-        # Button next
-        button_next_default = pygame.image.load("../assets/sprites/ui/cooking/button_next_default.png").convert_alpha()
-        button_next_hover = pygame.image.load("../assets/sprites/ui/cooking/button_next_hover.png").convert_alpha()
-        button_next_clicked = pygame.image.load("../assets/sprites/ui/cooking/button_next_clicked.png").convert_alpha()
-        # Scale
-        button_next_default_scaled = pygame.transform.scale(button_next_default, (
-            button_next_default.get_width() * 0.6, button_next_default.get_height() * 0.6))
-        button_next_hover_scaled = pygame.transform.scale(button_next_hover, (
-            button_next_hover.get_width() * 0.6, button_next_hover.get_height() * 0.6))
-        button_next_clicked_scaled = pygame.transform.scale(button_next_clicked, (
-            button_next_clicked.get_width() * 0.6, button_next_clicked.get_height() * 0.6))
-
-        # Assign scaled images to the dictionary
-        self.img_buttons = {
-            "cook": {
-                "default": button_cook_default_scaled,
-                "hover": button_cook_hover_scaled,
-                "clicked": button_cook_clicked_scaled,
-            },
-            "next": {
-                "default": button_next_default_scaled,
-                "hover": button_next_hover_scaled,
-                "clicked": button_next_clicked_scaled,
-            }
-        }
-
     def outlined_rect(self, x, y, w, h, outline, colour):
         pygame.draw.rect(self.screen, colour, pygame.Rect((x, y), (w, h)))
         pygame.draw.rect(self.screen, "Black", pygame.Rect((x, y), (w, h)), outline)
@@ -110,30 +71,8 @@ class UI:
                 if pygame.mouse.get_pressed()[0] == 1:
                     return True
 
-    def better_image_button(self, button, point, x_pos, y_pos):
-        mouse_pos = pygame.mouse.get_pos()
-        self.mouse_tracker.update_mouse_states()
-        mouse_released = self.mouse_tracker.get_just_released()[0]
-        mouse_clicking = pygame.mouse.get_pressed()[0]
-        p = {point: (x_pos, y_pos)}
-        rect = self.img_buttons[button]["default"].get_rect(**p)
-        if rect.collidepoint(mouse_pos) and (mouse_clicking or mouse_released):
-            if mouse_released:
-                clicked = True
-            else:
-                clicked = False
-            status = "clicked"
-        elif rect.collidepoint(mouse_pos) and not mouse_clicking:
-            status = "hover"
-            clicked = False
-        else:
-            status = "default"
-            clicked = False
-        self.screen.blit(self.img_buttons[button][status], rect)
-        return clicked
-
-    def better_text(self, point, x_pos, y_pos, size, colour, text):
-        font = pygame.font.Font("../assets/fonts/aller-font/Aller_Bd.ttf", size)
+    def better_text(self, family, font, point, x_pos, y_pos, size, colour, text):
+        font = pygame.font.Font(f"../assets/fonts/{family}/{font}.ttf", size)
         text = font.render(text, False, colour)
         p = {point: (x_pos, y_pos)}
         text_rect = text.get_rect(**p)
