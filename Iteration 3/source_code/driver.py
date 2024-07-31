@@ -36,7 +36,7 @@ cooking = Cooking(screen, inventory)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), "Just an egg."),
-    "Bread": Item("Bread", (2, 3),  "One loaf."),
+    "Bread": Item("Bread", (2, 3), "One loaf."),
     "Rice": Item("Rice", (4, 5), "White Bits")
 }
 recipes = {
@@ -52,23 +52,32 @@ mouse_released = None
 
 running = True
 while running:
+    key_tracker.clear_just_pressed()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        key_tracker.update(event)
+        mouse_tracker.update(event)
+
     screen.fill('black')
     w, h = sc_w - (x * 2), sc_h - (x * 2)
     pygame.draw.rect(screen, "White", pygame.Rect(x, y, w, h))
+
     if menu_section == "start":
         if not playing:
             playing = True
         else:
-            pos = pygame.mouse.get_pos()
-            current_map.run()
-            key_tracker.update()
-            if KeyTracker.K_r in key_tracker.keys_just_pressed():
+            current_map.run()  # Ensure current_map.run() does not block the event loop
+            if key_tracker.is_key_just_pressed(pygame.K_r):
                 if cookbook_open:
                     cookbook_open = False
                 else:
                     cookbook_open = True
+
             if cookbook_open:
                 cooking.book()
+
     if menu_section == "main":
         exit_button = ui.button("rect", False, sc_w * 0.825, sc_h * 0.025, sc_w * 0.15, sc_h * 0.075, "Red", None)
         start_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.275, sc_w * 0.425, sc_h * 0.2, "Green", None)
@@ -140,7 +149,8 @@ while running:
                 else:
                     temp1 = "Black"
                 colour_button = ui.button("rect", False, (sc_w - (x * 4) * 0.5) / 1.8 + ((sc_w * 0.0625) * x_temp),
-                                          sc_h * 0.7 + ((sc_w * 0.0625) * y_temp), x * (sc_w * 0.005), y * (sc_w * 0.005), value, None)
+                                          sc_h * 0.7 + ((sc_w * 0.0625) * y_temp), x * (sc_w * 0.005),
+                                          y * (sc_w * 0.005), value, None)
                 if colour_button:
                     ui.sprite_values[ui.menu_option][0] = value
         else:
@@ -168,9 +178,7 @@ while running:
         ui.text(sc_w * 0.875, sc_h * 0.185, int(sc_w * 0.04), "Black", "Exit")
     if menu_section == "exit":
         running = False
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+
     pygame.display.update()
     clock.tick(60)
 

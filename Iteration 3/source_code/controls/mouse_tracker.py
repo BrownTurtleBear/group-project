@@ -5,21 +5,23 @@ class MouseTracker:
     def __init__(self):
         self.prev_mouse_state = [0, 0, 0]
         self.current_mouse_state = [0, 0, 0]
+        self._mouse_just_pressed = [0, 0, 0]
+        self._mouse_just_released = [0, 0, 0]
 
-    def update_mouse_states(self):
-        self.prev_mouse_state = self.current_mouse_state[:]
-        self.current_mouse_state = pygame.mouse.get_pressed()
+    def update(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.current_mouse_state[event.button - 1] = 1
+            self._mouse_just_pressed[event.button - 1] = 1
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.current_mouse_state[event.button - 1] = 0
+            self._mouse_just_released[event.button - 1] = 1
+
+    def clear_just_events(self):
+        self._mouse_just_pressed = [0, 0, 0]
+        self._mouse_just_released = [0, 0, 0]
 
     def get_just_pressed(self):
-        just_pressed = [0, 0, 0]
-        for i in range(3):
-            if self.current_mouse_state[i] == 1 and self.prev_mouse_state[i] == 0:
-                just_pressed[i] = 1
-        return just_pressed
+        return self._mouse_just_pressed
 
     def get_just_released(self):
-        just_released = [0, 0, 0]
-        for i in range(3):
-            if self.current_mouse_state[i] == 0 and self.prev_mouse_state[i] == 1:
-                just_released[i] = 1
-        return just_released
+        return self._mouse_just_released
