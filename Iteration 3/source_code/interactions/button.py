@@ -1,7 +1,4 @@
 import pygame
-from controls.mouse_tracker import MouseTracker
-
-mouse_tracker = MouseTracker()
 
 
 class Button:
@@ -24,23 +21,24 @@ class Button:
 
         self.group = group
 
-    def update(self):
+    def update(self, mouse_tracker):
         mouse_pos = pygame.mouse.get_pos()
         self.clicked = False
 
         if self.rect.collidepoint(mouse_pos):
-            if mouse_tracker.get_just_pressed()[0]:
+            if mouse_tracker.is_button_just_pressed():
                 self.pressed = True
-            elif mouse_tracker.get_just_released()[0]:
+            elif mouse_tracker.is_button_just_released():
                 if self.pressed:
                     self.clicked = True
                 self.pressed = False
-            elif pygame.mouse.get_pressed()[0]:
-                self.pressed = True
             else:
-                self.pressed = False
+                self.pressed = mouse_tracker.is_button_pressed()
         else:
-            self.pressed = False
+            if mouse_tracker.is_button_just_released():
+                self.pressed = False
+            elif not mouse_tracker.is_button_pressed():
+                self.pressed = False
 
     def draw(self):
         mouse_pos = pygame.mouse.get_pos()

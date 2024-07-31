@@ -3,25 +3,32 @@ import pygame
 
 class MouseTracker:
     def __init__(self):
-        self.prev_mouse_state = [0, 0, 0]
-        self.current_mouse_state = [0, 0, 0]
-        self._mouse_just_pressed = [0, 0, 0]
-        self._mouse_just_released = [0, 0, 0]
+        self.previous_state = None
+        self.current_state = None
 
-    def update(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            self.current_mouse_state[event.button - 1] = 1
-            self._mouse_just_pressed[event.button - 1] = 1
-        elif event.type == pygame.MOUSEBUTTONUP:
-            self.current_mouse_state[event.button - 1] = 0
-            self._mouse_just_released[event.button - 1] = 1
+    def update(self):
+        if self.previous_state is None:
+            # First time update is called, initialize both states
+            self.previous_state = pygame.mouse.get_pressed()
+            self.current_state = self.previous_state
+        else:
+            self.previous_state = self.current_state
+            self.current_state = pygame.mouse.get_pressed()
 
-    def clear_just_events(self):
-        self._mouse_just_pressed = [0, 0, 0]
-        self._mouse_just_released = [0, 0, 0]
+    def is_button_pressed(self, button=0):
+        if self.current_state is None:
+            self.update()
+        return self.current_state[button]
 
-    def get_just_pressed(self):
-        return self._mouse_just_pressed
+    def is_button_just_pressed(self, button=0):
+        if self.current_state is None or self.previous_state is None:
+            self.update()
+        return self.current_state[button] and not self.previous_state[button]
 
-    def get_just_released(self):
-        return self._mouse_just_released
+    def is_button_just_released(self, button=0):
+        if self.current_state is None or self.previous_state is None:
+            self.update()
+        return not self.current_state[button] and self.previous_state[button]
+
+# Create a global instance of MouseTracker
+mouse_tracker = MouseTracker()
