@@ -21,7 +21,7 @@ class Cooking:
         original_cooking_book = pygame.image.load("../assets/sprites/ui/cooking/book.png").convert()
         original_width, original_height = original_cooking_book.get_size()
         self.cooking_book = pygame.transform.scale(original_cooking_book, (original_width * 5, original_height * 5))
-        self.cooking_book_rect = self.cooking_book.get_rect(center=(self.screen.width / 2, self.screen.height / 2))
+        self.cooking_book_rect = self.cooking_book.get_rect(center=(self.screen.get_width() / 2, self.screen.get_height() / 2))
 
     def book(self):
         self.screen.blit(self.cooking_book, self.cooking_book_rect)

@@ -8,7 +8,22 @@ class UI:
         self.mouse_tracker = MouseTracker()
         self.clicked = False
         self.menu_option = "Gender"
-        self.sprite_values = {}
+        self.sprite_values = {
+            "Gender": "None",
+            "Hair": ["White", 0],
+            "Eyes": ["Black", 0],
+            "Clothing 1": ["Black", 0],
+            "Clothing 2": ["Black", 0],
+            "Hat": ["Black", 0],
+            "Body": ["Brown", 0]}
+        self.colours_dict = {
+            "Hair": ["White", "Black", "Yellow", "Red", "Blue", "Brown"],
+            "Eyes": ["Black", "Brown", "Green", "Blue", "Crimson"],
+            "Clothing 1": ["Black", "Brown", "Green", "Blue", "Red", "White", "Orange"],
+            "Clothing 2": ["Black", "Brown", "Green", "Blue", "Red", "White", "Orange"],
+            "Hat": ["Black", "Brown", "Green", "Blue", "Red", "White", "Orange", "Grey"],
+            "Body": ["Brown"]
+        }
         self.style_dict = {}
 
         # Button cook
@@ -54,10 +69,11 @@ class UI:
         pygame.draw.rect(self.screen, colour, pygame.Rect((x, y), (w, h)))
         pygame.draw.rect(self.screen, "Black", pygame.Rect((x, y), (w, h)), outline)
 
-    def image_button(self, x, y, button):
-        button_rect = button[2].get_rect(center=(x, y))
-        self.screen.blit(button, button_rect)
-        return True
+    def image(self, x, y, w, h, location):
+        image = pygame.image.load(location)
+        image = pygame.transform.scale(image, (w, h))
+        image_rect = image.get_rect(center=(x, y))
+        self.screen.blit(image, image_rect)
 
     def text(self, x, y, size, colour, text):
         font = pygame.font.Font("../assets/fonts/aller-font/Aller_Bd.ttf", size)

@@ -2,6 +2,7 @@ import pygame
 from pytmx.util_pygame import load_pygame
 from players.player import Player
 
+
 class Map:
     def __init__(self, filename, tile_size, screen):
         self.tmx_data = load_pygame(filename)

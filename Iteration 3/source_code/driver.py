@@ -32,7 +32,7 @@ inventory = Inventory()
 current_map = Map("../assets/sprites/tile/map1.tmx", tile_size, screen)
 key_tracker = KeyTracker()
 mouse_tracker = MouseTracker()
-cooking = Cooking(screen, sc_w, inventory, mouse_tracker)
+cooking = Cooking(screen, inventory)
 # Items and Inventory
 items = {
     "Egg": Item("Egg", (0, 2), "Just an egg."),
