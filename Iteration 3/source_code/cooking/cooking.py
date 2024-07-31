@@ -28,9 +28,9 @@ class Cooking:
 
         # Create buttons
         self.cook_button = Button(self.screen, "cooking", "cook", "bottomright",
-                                  self.cooking_book_rect.right - 85, self.cooking_book_rect.bottom - 130, 0.9, 0.9)
-        self.next_button = Button(self.screen, "cooking", "next", "bottomright", self.cooking_book_rect.right - 50,
-                                  self.cooking_book_rect.bottom - 50, 0.45, 0.45)
+                                  self.cooking_book_rect.right - 235, self.cooking_book_rect.bottom - 200, 0.9, 0.9)
+        self.next_button = Button(self.screen, "cooking", "next", "bottomright",
+                                  self.cooking_book_rect.right - 120, self.cooking_book_rect.bottom - 90, 0.45, 0.45)
 
         self.buttons = [self.cook_button, self.next_button]
 
@@ -50,7 +50,7 @@ class Cooking:
         if self.next_button.clicked:
             self.recipe_index = (self.recipe_index + 1) % len(self.inventory.recipes)
 
-        self.ui.better_text("center", self.cooking_book_rect.left + 160, self.cooking_book_rect.top + 60, 26, "Black",
+        self.ui.better_text("aller-font", "Aller_Bd", "center", self.cooking_book_rect.left + 160, self.cooking_book_rect.top + 60, 26, "Black",
                             self.inventory.recipes[self.recipe_index].name)
-        self.ui.better_text("topright", self.cooking_book_rect.left + 220, self.cooking_book_rect.bottom - 220, 20,
+        self.ui.better_text("aller-font", "Aller_Bd", "topright", self.cooking_book_rect.left + 220, self.cooking_book_rect.bottom - 220, 20,
                             "Black", self.inventory.recipes[self.recipe_index].description)
