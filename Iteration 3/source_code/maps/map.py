@@ -18,24 +18,25 @@ class Map:
 
     def horizontal_movement_collision(self):
         player = self.player
-        player.rect.x += player.direction.x * player.speed
+        player.rect.x += player.position.x * player.speed
 
         for sprite in self.collision_sprites.sprites():
             if sprite.rect.colliderect(player.rect):
-                if player.direction.x < 0:
+                if player.position.x < self.screen.get_width():
+                    print(player.rect.left, player.position)
                     player.rect.left = sprite.rect.right
-                elif player.direction.x > 0:
+                elif player.position.x > 0:
                     player.rect.right = sprite.rect.left
 
     def vertical_movement_collision(self):
         player = self.player
-        player.rect.y += player.direction.y * player.speed
+        player.rect.y += player.position.y * player.speed
 
         for sprite in self.collision_sprites.sprites():
             if sprite.rect.colliderect(player.rect):
-                if player.direction.y < 0:
+                if player.position.y < self.screen.get_height():
                     player.rect.top = sprite.rect.bottom
-                elif player.direction.y > 0:
+                elif player.position.y > 0:
                     player.rect.bottom = sprite.rect.top
 
     def load_sprites(self):
