@@ -4,14 +4,6 @@ from controls.mouse_tracker import mouse_tracker
 from interactions.ui import UI
 
 
-def cook(inventory, recipe):
-    needed_ingredients = inventory.recipes[recipe].ingredients
-    if all(ni in inventory.items for ni in needed_ingredients):
-        return True
-    else:
-        return False
-
-
 class Cooking:
     def __init__(self, screen, inventory):
         self.screen = screen
@@ -34,6 +26,39 @@ class Cooking:
 
         self.buttons = [self.cook_button, self.next_button]
 
+        self.show_cooked_text = False
+        self.cook_text_timer = 0
+        self.cooked_recipe_name = ""
+
+    def cook(self, recipe):
+        needed_ingredients = self.inventory.recipes[recipe].ingredients
+        for ingredient in needed_ingredients:
+            if ingredient.name not in self.inventory.items or self.inventory.items[ingredient.name]['quantity'] == 0:
+                self.show_cooked_text = False
+                self.cook_text_timer = pygame.time.get_ticks()
+                self.cooked_recipe_name = self.inventory.recipes[recipe].name
+                return False
+
+        self.inventory.add_dish(self.inventory.recipes[recipe].dish, 1)
+        for ingredient in needed_ingredients:
+            self.inventory.remove_item(ingredient, 1)
+
+        self.show_cooked_text = True
+        self.cook_text_timer = pygame.time.get_ticks()
+        self.cooked_recipe_name = self.inventory.recipes[recipe].name
+        return True
+
+    def update_cooked_text(self):
+        current_time = pygame.time.get_ticks()
+        time_elapsed = current_time - self.cook_text_timer
+
+        if time_elapsed <= 2000:
+            text = f"Cooked {self.cooked_recipe_name}" if self.show_cooked_text else f"Could not cook {self.cooked_recipe_name}"
+            self.ui.better_text("aller-font", "Aller_Bd", "center", self.screen.get_width() // 2,
+                                self.screen.get_height() - 20, 20, "Black", text)
+        else:
+            self.show_cooked_text = False
+
     def book(self):
         self.screen.blit(self.cooking_book, self.cooking_book_rect)
 
@@ -42,15 +67,20 @@ class Cooking:
             button.draw()
 
         if self.cook_button.clicked:
-            if cook(self.inventory, self.recipe_index):
-                print(f"cooked {self.inventory.recipes[self.recipe_index].name}")
+            if self.cook(self.recipe_index):
+                self.show_cooked_text = True
             else:
-                print(f"You can't cook {self.inventory.recipes[self.recipe_index].name}")
+                self.show_cooked_text = False
+            self.cook_text_timer = pygame.time.get_ticks()
 
         if self.next_button.clicked:
             self.recipe_index = (self.recipe_index + 1) % len(self.inventory.recipes)
 
-        self.ui.better_text("aller-font", "Aller_Bd", "center", self.cooking_book_rect.left + 160, self.cooking_book_rect.top + 60, 26, "Black",
+        self.ui.better_text("aller-font", "Aller_Bd", "center", self.cooking_book_rect.left + 160,
+                            self.cooking_book_rect.top + 60, 26, "Black",
                             self.inventory.recipes[self.recipe_index].name)
-        self.ui.better_text("aller-font", "Aller_Bd", "topright", self.cooking_book_rect.left + 220, self.cooking_book_rect.bottom - 220, 20,
+        self.ui.better_text("aller-font", "Aller_Bd", "topright", self.cooking_book_rect.left + 220,
+                            self.cooking_book_rect.bottom - 220, 20,
                             "Black", self.inventory.recipes[self.recipe_index].description)
+
+        self.update_cooked_text()
