@@ -26,18 +26,18 @@ class Button:
         self.clicked = False
 
         if self.rect.collidepoint(mouse_pos):
-            if mouse_tracker.is_button_just_pressed():
+            if mouse_tracker.get_just_pressed():
                 self.pressed = True
-            elif mouse_tracker.is_button_just_released():
+            elif mouse_tracker.get_just_released():
                 if self.pressed:
                     self.clicked = True
                 self.pressed = False
             else:
-                self.pressed = mouse_tracker.is_button_pressed()
+                self.pressed = mouse_tracker.get_pressed()
         else:
-            if mouse_tracker.is_button_just_released():
+            if mouse_tracker.get_just_released():
                 self.pressed = False
-            elif not mouse_tracker.is_button_pressed():
+            elif not mouse_tracker.get_pressed():
                 self.pressed = False
 
     def draw(self):

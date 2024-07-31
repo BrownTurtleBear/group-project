@@ -28,7 +28,7 @@ volume = 50
 # Classes
 ui = UI(screen)
 inventory = Inventory()
-#player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
+# player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
 current_map = Map("../assets/sprites/tile/map1.tmx", tile_size, screen)
 key_tracker = KeyTracker()
 cooking = Cooking(screen, inventory)
@@ -42,6 +42,8 @@ recipes = {
     "Fried Egg on Toast": Recipe("Fried Egg on Toast", [items["Egg"], items["Bread"]], "Just egg on toast."),
     "Sushi": Recipe("Sushi", [items["Rice"]], "Japanese yummy")
 }
+inventory.add_item(items["Egg"], 1)
+inventory.add_item(items["Bread"], 1)
 inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory.add_recipe(recipes["Sushi"])
 inventory_open = False

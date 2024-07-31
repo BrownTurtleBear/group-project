@@ -14,7 +14,7 @@ class MouseTracker:
             self.previous_state = self.current_state
             self.current_state = pygame.mouse.get_pressed()
 
-    def get_button_pressed(self, button=0):
+    def get_pressed(self, button=0):
         if self.current_state is None:
             self.update()
         return self.current_state[button]
