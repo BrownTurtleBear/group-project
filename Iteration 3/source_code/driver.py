@@ -60,13 +60,15 @@ while running:
             playing = True
         else:
             pos = pygame.mouse.get_pos()
+            current_map.run()
             key_tracker.update()
-            if KeyTracker.K_e in key_tracker.keys_just_pressed():
+            if KeyTracker.K_r in key_tracker.keys_just_pressed():
                 if cookbook_open:
                     cookbook_open = False
+                else:
+                    cookbook_open = True
             if cookbook_open:
                 cooking.book()
-            current_map.run()
     if menu_section == "main":
         exit_button = ui.button("rect", False, sc_w * 0.825, sc_h * 0.025, sc_w * 0.15, sc_h * 0.075, "Red", None)
         start_button = ui.button("rect", False, sc_w * 0.3, sc_h * 0.275, sc_w * 0.425, sc_h * 0.2, "Green", None)
