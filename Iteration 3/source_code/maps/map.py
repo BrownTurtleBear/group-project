@@ -28,23 +28,15 @@ class Map:
                     player.rect.right = sprite.rect.left
 
     def vertical_movement_collision(self):
-        player = self.player.sprite
+        player = self.player
+        player.rect.y += player.direction.y * player.speed
 
         for sprite in self.collision_sprites.sprites():
             if sprite.rect.colliderect(player.rect):
-                if player.direction.y > 0:
-                    player.rect.bottom = sprite.rect.top
-                    player.direction.y = 0
-                    player.falling = 0
-                    player.jump_height = 0
-                elif player.direction.y < 0:
+                if player.direction.y < 0:
                     player.rect.top = sprite.rect.bottom
-                    player.direction.y = 0
-                    player.on_ceiling = True
-        if player.falling < 0 and player.direction.y < 0 or player.direction.y > 1:
-            player.on_ground = False
-        if player.on_ceiling and player.direction.y > 0:
-            player.on_ceiling = False
+                elif player.direction.y > 0:
+                    player.rect.bottom = sprite.rect.top
 
     def load_sprites(self):
         for i in range(0, self.width):
