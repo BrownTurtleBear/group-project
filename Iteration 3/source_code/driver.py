@@ -6,7 +6,7 @@ from items.inventory import Inventory
 from maps.map import Map
 from controls.key_tracker import KeyTracker
 from controls.mouse_tracker import mouse_tracker
-#from players.player import Player
+# from players.player import Player
 
 import pygame
 import math
@@ -48,8 +48,6 @@ inventory.add_recipe(recipes["Fried Egg on Toast"])
 inventory.add_recipe(recipes["Sushi"])
 inventory_open = False
 cookbook_open = False
-
-mouse_released = None
 
 running = True
 while running:

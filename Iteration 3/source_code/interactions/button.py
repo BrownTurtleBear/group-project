@@ -9,7 +9,7 @@ class Button:
         self.pressed = False
         default = pygame.image.load(f"../assets/sprites/ui/{parent}/button_{group}_default.png").convert_alpha()
         hover = pygame.image.load(f"../assets/sprites/ui/{parent}/button_{group}_hover.png").convert_alpha()
-        clicked = pygame.image.load(f"../assets/sprites/ui/{parent}/button_{group}_clicked.png").convert_alpha()
+        clicked = pygame.image.load("../assets/sprites/ui/{parent}/button_{group}_clicked.png").convert_alpha()
         self.default_image = pygame.transform.scale(default, (
             int(default.get_width() * x_scale), int(default.get_height() * y_scale)))
         self.hover_image = pygame.transform.scale(hover,
