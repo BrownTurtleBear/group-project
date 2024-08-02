@@ -1,11 +1,9 @@
 import pygame
-from controls.mouse_tracker import MouseTracker
 
 
 class UI:
     def __init__(self, screen):
         self.screen = screen
-        self.mouse_tracker = MouseTracker()
         self.clicked = False
         self.menu_option = "Gender"
         self.sprite_values = {

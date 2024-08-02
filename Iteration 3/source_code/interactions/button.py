@@ -1,4 +1,5 @@
 import pygame
+from controls.mouse_tracker import mouse_tracker
 
 
 class Button:
@@ -21,7 +22,7 @@ class Button:
 
         self.group = group
 
-    def update(self, mouse_tracker):
+    def update(self):
         mouse_pos = pygame.mouse.get_pos()
         self.clicked = False
 

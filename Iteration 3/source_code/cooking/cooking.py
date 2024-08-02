@@ -1,6 +1,5 @@
 import pygame
 from interactions.button import Button
-from controls.mouse_tracker import mouse_tracker
 from interactions.ui import UI
 
 
@@ -63,7 +62,7 @@ class Cooking:
         self.screen.blit(self.cooking_book, self.cooking_book_rect)
 
         for button in self.buttons:
-            button.update(mouse_tracker)
+            button.update()
             button.draw()
 
         if self.cook_button.clicked:
