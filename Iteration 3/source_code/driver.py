@@ -6,7 +6,7 @@ from items.inventory import Inventory
 from maps.map import Map
 from controls.key_tracker import KeyTracker
 from controls.mouse_tracker import mouse_tracker
-# from players.player import Player
+from players.player import Player
 
 import pygame
 import math
@@ -28,7 +28,7 @@ volume = 50
 # Classes
 ui = UI(screen)
 inventory = Inventory()
-# player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
+player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
 current_map = Map("../assets/sprites/tile/map1.tmx", tile_size, screen)
 key_tracker = KeyTracker()
 cooking = Cooking(screen, inventory)

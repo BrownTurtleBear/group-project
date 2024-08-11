@@ -40,8 +40,8 @@ class Player(pygame.sprite.Sprite):
     def animate(self, screen):
         if self.facing == "up":
             player_im = pygame.transform.flip(self.image, False, True)
-        elif self.facing == "down":
-            player_im = pygame.transform.flip(self.image, True, True)
+        # elif self.facing == "down":
+            # player_im = pygame.transform.flip(self.image, True, True)
         elif self.facing == "right":
             player_im = pygame.transform.flip(self.image, True, False)
         else:
