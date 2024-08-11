@@ -7,6 +7,7 @@ from maps.map import Map
 from controls.key_tracker import KeyTracker
 from controls.mouse_tracker import mouse_tracker
 from players.player import Player
+from npcs.npc import NPC
 
 import pygame
 import math
@@ -29,6 +30,9 @@ volume = 50
 ui = UI(screen)
 inventory = Inventory()
 player = Player((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2))
+npc1 = NPC((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2), "../assets/sprites/characters/red_miku.png")
+npc2 = NPC((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2), "../assets/sprites/characters/yellow_miku.png")
+npc3 = NPC((tile_size[0]*5, tile_size[1]*5), (tile_size[0]*2, tile_size[1]*2), "../assets/sprites/characters/purple_miku.png")
 current_map = Map("../assets/sprites/tile/map1.tmx", tile_size, screen)
 key_tracker = KeyTracker()
 cooking = Cooking(screen, inventory)

@@ -1,6 +1,7 @@
 import pygame
 from pytmx.util_pygame import load_pygame
 from players.player import Player
+from npcs.npc import NPC
 
 
 class Map:
@@ -13,6 +14,7 @@ class Map:
         self.all_sprites = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
         self.player_group = None
+        self.npc_group = pygame.sprite.Group()
         self.player = Player((self.tile_size[0]*5, self.tile_size[1]*5), (self.tile_size[0]*2, self.tile_size[1]*2))
         self.load_sprites()
 
@@ -61,6 +63,12 @@ class Map:
         player_sprite = Player((x, y), (self.tile_size[0]*2, self.tile_size[1]*2))
         self.player_group.add(player_sprite)
 
+        # NPCs
+        npc1 = NPC((100, 100), (self.tile_size[0]*2, self.tile_size[1]*2), "../assets/sprites/characters/red_miku.png")
+        npc2 = NPC((200, 150), (self.tile_size[0]*2, self.tile_size[1]*2), "../assets/sprites/characters/yellow_miku.png")
+        npc3 = NPC((300, 200), (self.tile_size[0]*2, self.tile_size[1]*2), "../assets/sprites/characters/purple_miku.png")
+        self.npc_group.add(npc1, npc2, npc3)
+
     def redraw(self):
         for i in range(self.width):
             for j in range(self.height):
@@ -73,5 +81,7 @@ class Map:
     def run(self):
         self.redraw()
         self.player.update(self.screen)
+        for npc in self.npc_group:
+            npc.update(self.screen)
         self.horizontal_movement_collision()
         self.vertical_movement_collision()

@@ -9,4 +9,4 @@ class NPC(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
 
     def update(self, screen):
-        screen.blit(self.image, self.image_rect)
+        screen.blit(self.image, self.rect)
