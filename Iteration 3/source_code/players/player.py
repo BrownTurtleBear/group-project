@@ -1,5 +1,4 @@
 import pygame
-from os import walk
 
 
 class Player(pygame.sprite.Sprite):
@@ -12,16 +11,33 @@ class Player(pygame.sprite.Sprite):
         self.position = pygame.math.Vector2(pos)
         self.speed = 1.3
 
-    def get_input(self):
+    def move_left_right(self, key_walk=0):
+        self.position.x += key_walk * self.speed
+        self.facing = "right" if key_walk == 1 else "left"
+        self.rect.x = self.position.x
+
+    def move_up_down(self, key_walk=0):
+        self.position.y += key_walk * self.speed
+        self.facing = "down" if key_walk == 1 else "up"
+        self.rect.y = self.position.y
+
+    # Split get_input() into x & y components, as collision requires handling immediately after every x or y move
+    def x_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.move_left_right(1)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.move_left_right(-1)
+
+    def y_input(self):
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.move_up_down(1)
         elif keys[pygame.K_UP] or keys[pygame.K_w]:
             self.move_up_down(-1)
+
+    def speed_input(self):
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_LSHIFT]:
             if self.speed < 2.6:
                 self.speed += 0.1
@@ -29,26 +45,15 @@ class Player(pygame.sprite.Sprite):
             if self.speed > 1.3:
                 self.speed -= 0.1
 
-    def move_left_right(self, key_walk=0):
-        self.position.x += key_walk * self.speed
-        self.facing = "right" if key_walk == 1 else "left"
-
-    def move_up_down(self, key_walk=0):
-        self.position.y += key_walk * self.speed
-        self.facing = "down" if key_walk == 1 else "up"
-
     def animate(self, screen):
-        if self.facing == "up":
-            player_im = pygame.transform.flip(self.image, False, True)
+        player_im = self.image
+        # if self.facing == "up":
+            # player_im = pygame.transform.flip(self.image, False, True)
         # elif self.facing == "down":
             # player_im = pygame.transform.flip(self.image, True, True)
-        elif self.facing == "right":
+        if self.facing == "right":
             player_im = pygame.transform.flip(self.image, True, False)
-        else:
-            player_im = self.image
+        # elif self.facing == "left":
+            # player_im = pygame.transform.flip(self.image, False, False)
         self.image_rect = self.position
         screen.blit(player_im, self.image_rect)
-
-    def update(self, screen):
-        self.get_input()
-        self.animate(screen)
